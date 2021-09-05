@@ -1,1 +1,0 @@
-Frontend ReadMe file

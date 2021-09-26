@@ -21,10 +21,21 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @PostMapping("/")
+    @PostMapping("/products")
     public ResponseEntity<?> addProducts(@RequestBody Product[] products){
         try {
-            productService.addProduct(products);
+            productService.addProducts(products);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping("/")
+    public ResponseEntity<?> addProducts(@RequestBody Product product){
+        try {
+            productService.addProduct(product);
             return new ResponseEntity<>(HttpStatus.OK);
         }
         catch (Exception e){
@@ -48,6 +59,16 @@ public class ProductController {
         try {
             productService.deleteProduct(id);
             return new ResponseEntity<>(HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/id")
+    public ResponseEntity<?> createPaymentId(){
+        try {
+            return new ResponseEntity<>(productService.createProductId(), HttpStatus.OK);
         }
         catch (Exception e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);

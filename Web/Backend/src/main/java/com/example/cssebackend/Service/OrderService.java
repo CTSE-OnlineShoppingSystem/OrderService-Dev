@@ -46,6 +46,11 @@ public class OrderService {
         return orders;
     }
 
+    //get Single order
+    public Object getOrder(String id){
+        return orderRepository.findById(id);
+    }
+
     //get Approved orders
     public List<Order> getApprovedOrders(){
         List<Order> orders = orderRepository.findAll();
@@ -100,6 +105,30 @@ public class OrderService {
         for (Order order : orders){
             if (order.getOrderId().equals(id)){
                 order.setPaymentStatus("Paid");
+                orderRepository.save(order);
+                break;
+            }
+        }
+    }
+
+    //change payment status to approve
+    public void approveOrder(String id){
+        List<Order> orders = orderRepository.findAll();
+        for (Order order : orders){
+            if (order.getOrderId().equals(id)){
+                order.setApprovalStatus("Approved");
+                orderRepository.save(order);
+                break;
+            }
+        }
+    }
+
+    //change approve status to reject
+    public void rejectOrder(String id){
+        List<Order> orders = orderRepository.findAll();
+        for (Order order : orders){
+            if (order.getOrderId().equals(id)){
+                order.setApprovalStatus("Rejected");
                 orderRepository.save(order);
                 break;
             }

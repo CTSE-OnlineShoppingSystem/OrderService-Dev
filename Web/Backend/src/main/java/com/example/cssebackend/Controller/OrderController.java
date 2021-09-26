@@ -43,6 +43,16 @@ public class OrderController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getOrder(@PathVariable String id){
+        try {
+            return new ResponseEntity<>(orderService.getOrder(id), HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @GetMapping("/pendingOrders")
     public ResponseEntity<?> getPendingOrders(){
         try {
@@ -81,6 +91,28 @@ public class OrderController {
         try {
             List<Order> orders = orderService.getRejectedOrders();
             return new ResponseEntity<>(orders, HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping("/approve/{id}")
+    public ResponseEntity<?> approveOrder(@PathVariable String id){
+        try {
+            orderService.approveOrder(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping("/reject/{id}")
+    public ResponseEntity<?> rejectOrder(@PathVariable String id){
+        try {
+            orderService.rejectOrder(id);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
         catch (Exception e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);

@@ -2,6 +2,7 @@ package com.example.cssebackend.Service;
 
 import com.example.cssebackend.Model.Cart;
 import com.example.cssebackend.Model.Item;
+import com.example.cssebackend.Model.Product;
 import com.example.cssebackend.Repository.CartRepository;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,7 @@ public class CartService {
             for(Item item : cart.getItem()){
                 totPrice = totPrice + (item.getItemPrice()*item.getQuantity());
             }
+            cart.setCartId(createCartId());
             cart.setTotal(totPrice);
             cartRepository.insert(cart);
         }
@@ -87,6 +89,25 @@ public class CartService {
         cartItem.setTotal(totPrice);
         cartItem.setItem(items);
         cartRepository.save(cartItem);
+    }
+
+    //create cart Id
+    public String createCartId(){
+        List<Cart> carts = cartRepository.findAll();
+        String cartId;
+
+        if (carts.isEmpty()){
+            cartId = "CA" + 1;
+        }
+        else {
+            Cart item = carts.stream().reduce((first, second) -> second).orElse(null);
+            String lastId = item.getCartId();
+            int lastIdNum = Integer.parseInt(lastId.substring(2));
+            int size = lastIdNum+1;
+            cartId = "CA" + size;
+        }
+
+        return cartId;
     }
 
     //delete cart details

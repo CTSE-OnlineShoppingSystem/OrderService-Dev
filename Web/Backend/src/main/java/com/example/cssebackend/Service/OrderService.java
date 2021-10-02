@@ -2,7 +2,9 @@ package com.example.cssebackend.Service;
 
 import com.example.cssebackend.Model.Item;
 import com.example.cssebackend.Model.Order;
+import com.example.cssebackend.Model.Product;
 import com.example.cssebackend.Repository.OrderRepository;
+import com.example.cssebackend.Repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,10 +15,12 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final CartService cartService;
+    private final ProductService productService;
 
-    public OrderService(OrderRepository orderRepository, CartService cartService) {
+    public OrderService(OrderRepository orderRepository, CartService cartService, ProductRepository productRepository, ProductService productService) {
         this.orderRepository = orderRepository;
         this.cartService = cartService;
+        this.productService = productService;
     }
 
     //add order
@@ -25,6 +29,7 @@ public class OrderService {
         float priceLimit = 100000;
         for(Item item : order.getItem()){
             totPrice = totPrice + (item.getItemPrice()*item.getQuantity());
+            productService.decrementAvailability(item.getItemId(), item.getQuantity());
         }
         if (totPrice >= priceLimit){
             order.setApprovalStatus("Pending");
@@ -138,5 +143,24 @@ public class OrderService {
                 break;
             }
         }
+    }
+
+    //create order Id
+    public String createOrderId(){
+        List<Order> items = orderRepository.findAll();
+        String itemId;
+
+        if (items.isEmpty()){
+            itemId = "OR" + 1;
+        }
+        else {
+            Order item = items.stream().reduce((first, second) -> second).orElse(null);
+            String lastId = item.getOrderId();
+            int lastIdNum = Integer.parseInt(lastId.substring(2));
+            int size = lastIdNum+1;
+            itemId = "OR" + size;
+        }
+
+        return itemId;
     }
 }

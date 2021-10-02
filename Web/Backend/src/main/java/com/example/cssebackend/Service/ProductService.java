@@ -21,7 +21,7 @@ public class ProductService {
         productRepository.save(product);
     }
 
-    //insert product lis
+    //insert product list
     public void addProducts(Product[] products){
         for (Product product : products){
             productRepository.save(product);
@@ -38,22 +38,33 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    //create payment Id
+    //create product Id
     public String createProductId(){
         List<Product> products = getAllProducts();
-        String paymentId;
+        String productId;
 
         if (products.isEmpty()){
-            paymentId = "PR" + 1;
+            productId = "PR" + 1;
         }
         else {
             Product item = products.stream().reduce((first, second) -> second).orElse(null);
             String lastId = item.getProductId();
             int lastIdNum = Integer.parseInt(lastId.substring(2));
             int size = lastIdNum+1;
-            paymentId = "PR" + size;
+            productId = "PR" + size;
         }
 
-        return paymentId;
+        return productId;
+    }
+
+    //decrement availability
+    public void decrementAvailability(String itemId, float quantity){
+        List<Product> products = productRepository.findAll();
+        for (Product item : products){
+            if (item.getProductId().equals(itemId)){
+                item.setAvailability(item.getAvailability()-quantity);
+                productRepository.save(item);
+            }
+        }
     }
 }

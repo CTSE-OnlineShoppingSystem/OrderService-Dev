@@ -1,6 +1,7 @@
 package com.example.cssebackend.Controller;
 
 import com.example.cssebackend.Model.Product;
+import com.example.cssebackend.Repository.ProductRepository;
 import com.example.cssebackend.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,8 +18,11 @@ public class ProductController {
     @Autowired
     private final ProductService productService;
 
-    public ProductController(ProductService productService) {
+    private final ProductRepository productRepository;
+
+    public ProductController(ProductService productService, ProductRepository productRepository) {
         this.productService = productService;
+        this.productRepository = productRepository;
     }
 
     @PostMapping("/products")
@@ -73,5 +77,10 @@ public class ProductController {
         catch (Exception e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/getbyid/{id}")
+    public ResponseEntity<?> getProductById(@PathVariable String id) {
+        return ResponseEntity.ok(productRepository.findById(id));
     }
 }

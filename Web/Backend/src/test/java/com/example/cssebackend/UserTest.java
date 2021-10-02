@@ -21,7 +21,7 @@ public class UserTest {
 
     @Test
     public void testCreate(){
-        User user = new User("U01", "Hansani", "Management Staff", "Manager");
+        User user = new User("U01", "Hansani", "123","Management Staff", "Manager");
         userService.addUser(user);
         Assertions.assertTrue(true, "User Added");
     }
@@ -29,7 +29,7 @@ public class UserTest {
     @Test
     public void testById(){
 
-        User user = new User("U01", "Hansani", "Management Staff", "Manager");
+        User user = new User("U01", "Hansani", "123","Management Staff", "Manager");
 
         userService.getUser(user.getUserId());
         Assertions.assertTrue(true, "User Founded");
@@ -38,7 +38,7 @@ public class UserTest {
     @Test
     public void testByUserIdNegative(){
 
-        User user = new User("U01", "Hansani", "Management Staff", "Manager");
+        User user = new User("U01", "Hansani", "123","Management Staff", "Manager");
 
         userService.getUser("U10");
         Assertions.assertFalse(false, "User Not Found");

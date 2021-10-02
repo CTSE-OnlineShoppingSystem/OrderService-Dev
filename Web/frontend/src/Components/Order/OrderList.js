@@ -1,8 +1,21 @@
 import {Component} from "react/cjs/react.production.min";
 import axios from "axios";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCheck, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
-import {Badge, Button, ButtonGroup, Modal, Table} from "react-bootstrap";
+import {
+    faCheck,
+    faExternalLinkAlt,
+    faMoneyBill,
+    faMoneyBillAlt, faMoneyBillWave, faMoneyBillWaveAlt,
+    faMoneyCheck,
+    faTrashAlt
+} from "@fortawesome/free-solid-svg-icons";
+import {Badge, Button, ButtonGroup, Card, Container, Modal, Nav, Navbar, NavDropdown, Table} from "react-bootstrap";
+import './Order.css';
+import '../../Stylesheets/Home.css'
+import React from "react";
+import AuthenticationService from "../Login/AuthenticationService";
+import Swal from "sweetalert2";
+import Navbar1 from '../Navbar1'
 
 class OrderList extends Component{
 
@@ -11,6 +24,7 @@ class OrderList extends Component{
 
         this.state = {
             orders: [],
+            userRole: AuthenticationService.loggedUserRole()
 
         }
     }
@@ -76,135 +90,272 @@ class OrderList extends Component{
 
     approveHandler = (id) =>{
         axios.put(`http://localhost:8080/order/approve/${id}`)
+            .then(res => {
+                console.log(res.data)
+                if (res.status === 200) {
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successful',
+                        html: '<p>Order approved successfully!!</p>',
+                        background: '#041c3d',
+                        confirmButtonColor: '#3aa2e7',
+                        iconColor: '#60e004'
+                    })
+                    this.refreshTable();
+
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        html: '<p>There was an error approving the order!!</p>',
+                        background: '#041c3d',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        iconColor: '#e00404'
+                    })
+                }
+            });
         this.refreshTable();
     }
 
     rejectHandler = (id) =>{
         axios.put(`http://localhost:8080/order/reject/${id}`)
+            .then(res => {
+                console.log(res.data)
+                if (res.status === 200) {
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Successful',
+                        html: '<p>Order rejected successfully!!</p>',
+                        background: '#041c3d',
+                        confirmButtonColor: '#3aa2e7',
+                        iconColor: '#60e004'
+                    })
+                     this.refreshTable();
+
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        html: '<p>There was an error rejecting the order!!</p>',
+                        background: '#041c3d',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        iconColor: '#e00404'
+                    })
+                }
+            });
         this.refreshTable();
+    }
+    logout = () => {
+        AuthenticationService.logout();
+        this.props.history.push("/")
     }
 
     render() {
         const {orders} = this.state;
         return (
-            <div className={"main-div"}>
+            <div className={"background"}>
                 <div>
-                    <ButtonGroup className={"order-btn-group"}>
-                        <Button variant={"outline-info"} type={"submit"} className={"btn-status"}
-                                onClick={this.refreshTable}>ALL ORDERS</Button>
-                        <Button variant={"outline-success"} type={"submit"} className={"btn-status"}
-                                onClick={() => this.approvedOrders()}>APPROVED</Button>
-                        <Button variant={"outline-danger"} type={"submit"} className={"btn-status"}
-                                onClick={() => this.rejectedOrders()}>REJECTED</Button>
-                        <Button variant={"outline-warning"} type={"submit"} className={"btn-status"}
-                                onClick={() => this.pendingOrders()}>PENDING</Button>
-                        <Button variant={"outline-primary"} type={"submit"} className={"btn-status"}
-                                onClick={() => this.automaticallyApprovedOrders()}>AUTOMATICALLY APPROVED</Button>
-                    </ButtonGroup>
+                    {/*<Navbar expand="lg" className={"nav-main"}>*/}
+                    {/*    <Container>*/}
+                    {/*        <Navbar.Brand href="#home" className={"topic"}>Procurement System</Navbar.Brand>*/}
+                    {/*        <Navbar.Toggle aria-controls="basic-navbar-nav" />*/}
+                    {/*        <Navbar.Collapse id="basic-navbar-nav">*/}
+                    {/*            <Nav className="me-auto">*/}
+                    {/*                /!*<Nav.Link href="/">Home</Nav.Link>*!/*/}
+                    {/*                <Nav.Link href="/products" className={"topic-link"}>Products</Nav.Link>*/}
+                    {/*                <Nav.Link href="/orders" className={"topic-link"}>Orders</Nav.Link>*/}
+                    {/*                <Nav.Link href="/paymentList" className={"topic-link"}>Payments</Nav.Link>*/}
+                    {/*            </Nav>*/}
+                    {/*            <Nav>*/}
+                    {/*                <Nav.Link ><button className={"btn-logout"} onClick={this.logout}>Log Out</button></Nav.Link>*/}
+
+
+                    {/*            </Nav>*/}
+                    {/*        </Navbar.Collapse>*/}
+                    {/*    </Container>*/}
+                    {/*</Navbar>*/}
+                    <Navbar1/>
                 </div>
+                <Card className={"crd-order-tb"}>
+                    <Card.Body>
+                        <Card.Title className={"crd-order-title"}>Orders List</Card.Title>
+                    <div className={"main-div"}>
 
-                <Table striped responsive hover bordered>
-                    <thead>
-                    <tr>
-                        <th className={"text-center"}>Order ID</th>
-                        <th className={"text-center"}>Vendor ID</th>
-                        <th className={"text-center"}>Vendor Name</th>
-                        <th className={"text-center"}>Date</th>
-                        <th className={"text-center"}>Approve Status</th>
-                        <th className={"text-center"}>Payment Status</th>
-                        <th className={"text-center"}>Delivery Status</th>
-                        <th className={"text-center"}>Items</th>
-                        <th className={"text-center"}>Delivery Details</th>
-                        <th className={"text-center"}>Total Price</th>
-                        <th className={"text-center"}>Action</th>
-                        <th className={"text-center"}>Pay</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {
-                        orders.length === 0 ?
-                            <tr align={"center"}>
-                                <td colSpan={"5"}>No records at the moment</td>
+                        <div>
+                            <ButtonGroup className={"order-btn-group"}>
+                                <Button variant={"outline-primary"} type={"submit"} className={"btn-status"}
+                                        onClick={this.refreshTable}>ALL ORDERS</Button>
+                                <Button variant={"outline-success"} type={"submit"} className={"btn-status"}
+                                        onClick={() => this.approvedOrders()}>APPROVED</Button>
+                                <Button variant={"outline-danger"} type={"submit"} className={"btn-status"}
+                                        onClick={() => this.rejectedOrders()}>REJECTED</Button>
+                                <Button  variant={"outline-warning"} type={"submit"} className={"btn-status"}
+                                        onClick={() => this.pendingOrders()}>PENDING</Button>
+                                <Button variant={"outline-secondary"} type={"submit"} className={"btn-status"}
+                                        onClick={() => this.automaticallyApprovedOrders()}>AUTOMATICALLY APPROVED</Button>
+                            </ButtonGroup>
+                        </div>
+
+                        <Table striped responsive hover bordered className={"order-table"}>
+                            <thead>
+                            <tr>
+                                <th className={"text-center"}>Order ID</th>
+                                <th className={"text-center"}>Vendor ID</th>
+                                <th className={"text-center"}>Vendor Name</th>
+                                <th className={"text-center"}>Date</th>
+                                <th className={"text-center"}>Approve Status</th>
+                                <th className={"text-center"}>Payment Status</th>
+                                <th className={"text-center"}>Delivery Status</th>
+                                <th className={"text-center"}>Items</th>
+                                <th className={"text-center"}>Delivery Details</th>
+                                <th className={"text-center"}>Total Price</th>
+                                <th className={"text-center"}>Action</th>
+                                <th className={"text-center"}>Pay</th>
                             </tr>
-
-                            : [
-                                orders.map (order =>
-                                    <tr key={order.orderId}>
-                                        <td style={{verticalAlign: 'middle'}}>{order.orderId}</td>
-                                        <td style={{verticalAlign: 'middle'}}>{order.vendorId}</td>
-                                        <td style={{verticalAlign: 'middle'}}>{order.vendorName}</td>
-                                        <td style={{verticalAlign: 'middle'}}>{order.modifiedDate}</td>
-                                        <td className={"text-center"} style={{verticalAlign: 'middle'}}>
-                                            {order.approvalStatus === "Approved" &&
-                                            <Badge variant="success" className={"px-3 py-2"} key={"0"}>APPROVED</Badge>
-                                            }
-                                            {order.approvalStatus === "Rejected" &&
-                                            <Badge variant="danger" className={"px-3 py-2"} key={"0"}>REJECTED</Badge>
-                                            }
-                                            {order.approvalStatus === "Pending" &&
-                                            <Badge variant="warning" className={"px-3 py-2"} key={"0"}>PENDING</Badge>
-                                            }
-                                            {order.approvalStatus === "Automatically Approved" &&
-                                            <Badge variant="success" className={"px-3 py-2"} key={"0"}>AUTOMATICALLY APPROVED</Badge>
-                                            }
-                                        </td>
-                                        <td className={"text-center"} style={{verticalAlign: 'middle'}}>
-                                            {order.paymentStatus === "Paid" &&
-                                            <Badge variant="success" className={"px-3 py-2"} key={"0"}>APPROVED</Badge>
-                                            }
-                                            {order.paymentStatus === "Pending" &&
-                                            <Badge variant="warning" className={"px-3 py-2"} key={"0"}>PENDING</Badge>
-                                            }
-                                        </td>
-                                        <td className={"text-center"} style={{verticalAlign: 'middle'}}>
-                                            {order.deliveryDetails === "Completed" &&
-                                            <Badge variant="success" className={"px-3 py-2"} key={"0"}>APPROVED</Badge>
-                                            }
-                                            {order.deliveryDetails === "Pending" &&
-                                            <Badge variant="warning" className={"px-3 py-2"} key={"0"}>PENDING</Badge>
-                                            }
-                                        </td>
-                                        <td style={{verticalAlign: 'middle'}}>click here to view items</td>
-                                        <td style={{verticalAlign: 'middle'}}>{order.OrderDetails}</td>
-                                        <td style={{verticalAlign: 'middle'}}>{order.total}</td>
-                                        <td className={"text-center"} style={{verticalAlign: 'middle'}}>
-                                            <ButtonGroup>
-                                                <Button variant={"warning"} type={"submit"}
-                                                        onClick={() => this.approveHandler(order.orderId)}>
-                                                    <FontAwesomeIcon icon={faCheck}/> Approve
-                                                </Button>
-                                                <Button variant={"danger"} type={"submit"}
-                                                        onClick={() => this.rejectHandler(order.orderId)}>
-                                                    <FontAwesomeIcon icon={faTrashAlt}/> Reject
-                                                </Button>
-                                            </ButtonGroup>
-                                        </td>
-                                        <td className={"text-center"} style={{verticalAlign: 'middle'}}>
-                                            <Button variant={"warning"} type={"submit"}>
-                                                <FontAwesomeIcon icon={faCheck}/> Pay
-                                            </Button>
-                                        </td>
+                            </thead>
+                            <tbody>
+                            {
+                                orders.length === 0 ?
+                                    <tr align={"center"}>
+                                        <td colSpan={"5"}>No records at the moment</td>
                                     </tr>
-                                )
-                            ]
-                    }
-                    </tbody>
-                </Table>
+
+                                    : [
+                                        orders.map (order =>
+                                            <tr key={order.orderId}>
+                                                <td style={{verticalAlign: 'middle'}}>{order.orderId}</td>
+                                                <td style={{verticalAlign: 'middle'}}>{order.vendorId}</td>
+                                                <td style={{verticalAlign: 'middle'}}>{order.vendorName}</td>
+                                                <td style={{verticalAlign: 'middle'}}>{order.modifiedDate}</td>
+                                                <td className={"text-center"} style={{verticalAlign: 'middle'}}>
+                                                    {order.approvalStatus === "Approved" &&
+                                                    <Badge bg="primary" className={"px-3 py-2"} key={"0"}>APPROVED</Badge>
+                                                    }
+                                                    {order.approvalStatus === "Rejected" &&
+                                                    <Badge bg="danger" className={"px-3 py-2"} key={"0"}>REJECTED</Badge>
+                                                    }
+                                                    {order.approvalStatus === "Pending" &&
+                                                    <Badge bg="warning" text="dark" className={"px-3 py-2"} key={"0"}>PENDING</Badge>
+                                                    }
+                                                    {order.approvalStatus === "Automatically Approved" &&
+                                                    <Badge bg="secondary" className={"px-3 py-2"} key={"0"}>AUTOMATICALLY APPROVED</Badge>
+                                                    }
+                                                </td>
+                                                <td className={"text-center"} style={{verticalAlign: 'middle'}}>
+                                                    {order.paymentStatus === "Paid" &&
+                                                    <Badge bg="primary" className={"px-3 py-2"} key={"0"}>APPROVED</Badge>
+                                                    }
+                                                    {order.paymentStatus === "Pending" &&
+                                                    <Badge bg="warning" text="dark" className={"px-3 py-2"} key={"0"}>PENDING</Badge>
+                                                    }
+                                                </td>
+                                                <td className={"text-center"} style={{verticalAlign: 'middle'}}>
+                                                    {order.deliveryDetails === "Completed" &&
+                                                    <Badge bg="success" className={"px-3 py-2"} key={"0"}>APPROVED</Badge>
+                                                    }
+                                                    {order.deliveryDetails === "Pending" &&
+                                                    <Badge bg="warning" text="dark" className={"px-3 py-2"} key={"0"}>PENDING</Badge>
+                                                    }
+                                                </td>
+                                                <td style={{verticalAlign: 'middle'}}> <Button variant={"outline-primary"} >
+                                                    <FontAwesomeIcon icon={faExternalLinkAlt}/>
+                                                </Button></td>
+                                                <td style={{verticalAlign: 'middle'}}>{order.OrderDetails}</td>
+                                                <td style={{verticalAlign: 'middle'}}>Rs.{order.total}</td>
+                                                <td className={"text-center"} style={{verticalAlign: 'middle'}}>
+                                                    {this.state.userRole === "Management Staff" &&
+                                                    <ButtonGroup>
+
+                                                        <Button variant={"outline-primary"} type={"submit"}
+                                                                onClick={() => this.approveHandler(order.orderId)}>
+                                                            <FontAwesomeIcon icon={faCheck}/>
+                                                        </Button>
+                                                        <Button variant={"outline-danger"} type={"submit"}
+                                                                onClick={() => this.rejectHandler(order.orderId)}>
+                                                            <FontAwesomeIcon icon={faTrashAlt}/>
+                                                        </Button>
+                                                    </ButtonGroup>
+                                                    }
+                                                    {this.state.userRole === "Accounting Staff" &&
+                                                    <ButtonGroup>
+
+                                                        <Button variant={"outline-primary"} type={"submit"}
+                                                                onClick={() => this.approveHandler(order.orderId)} disabled>
+                                                            <FontAwesomeIcon icon={faCheck}/>
+                                                        </Button>
+                                                        <Button variant={"outline-danger"} type={"submit"}
+                                                                onClick={() => this.rejectHandler(order.orderId)} disabled>
+                                                            <FontAwesomeIcon icon={faTrashAlt}/>
+                                                        </Button>
+                                                    </ButtonGroup>
+                                                    }
+                                                    {this.state.userRole === "Site Manager" &&
+                                                    <ButtonGroup>
+
+                                                        <Button variant={"outline-primary"} type={"submit"}
+                                                                onClick={() => this.approveHandler(order.orderId)} disabled>
+                                                            <FontAwesomeIcon icon={faCheck}/>
+                                                        </Button>
+                                                        <Button variant={"outline-danger"} type={"submit"}
+                                                                onClick={() => this.rejectHandler(order.orderId)} disabled>
+                                                            <FontAwesomeIcon icon={faTrashAlt}/>
+                                                        </Button>
+                                                    </ButtonGroup>
+                                                    }
+                                                </td>
+                                                {this.state.userRole === "Management Staff" &&
+                                                <td className={"text-center"} style={{verticalAlign: 'middle'}}>
+                                                    <Button variant={"outline-success"} type={"submit"} disabled>
+                                                        <FontAwesomeIcon icon={faMoneyBillWaveAlt}/>
+                                                    </Button>
+                                                </td>
+                                                }
+
+                                                {this.state.userRole === "Accounting Staff" &&
+                                                <td className={"text-center"} style={{verticalAlign: 'middle'}}>
+                                                    <Button variant={"outline-success"} type={"submit"} >
+                                                        <FontAwesomeIcon icon={faMoneyBillWaveAlt}/>
+                                                    </Button>
+                                                </td>
+                                                }
+
+                                                {this.state.userRole === "Site Manager" &&
+                                                <td className={"text-center"} style={{verticalAlign: 'middle'}}>
+                                                    <Button variant={"outline-success"} type={"submit"} disabled>
+                                                        <FontAwesomeIcon icon={faMoneyBillWaveAlt}/>
+                                                    </Button>
+                                                </td>
+                                                }
+                                            </tr>
+                                        )
+                                    ]
+                            }
+                            </tbody>
+                        </Table>
+
+                        {/*--------------------------Model Box to Edit Conference--------------------------*/}
+
+                        {/*<Modal show={this.state.show} onHide={this.handleClose} centered>*/}
+                        {/*    <Modal.Header closeButton>*/}
+                        {/*        <Modal.Title>Update</Modal.Title>*/}
+                        {/*    </Modal.Header>*/}
+                        {/*    <Modal.Body> <UpdateConferenceDetailsComponent conferenceId={this.state.conferenceId}/>*/}
+                        {/*    </Modal.Body>*/}
+                        {/*</Modal>*/}
+
+                        {/*--------------------------------------------------------------------------------*/}
+                    </div>
+                    </Card.Body>
+</Card>
 
 
-                {/*--------------------------Model Box to Edit Conference--------------------------*/}
-
-                {/*<Modal show={this.state.show} onHide={this.handleClose} centered>*/}
-                {/*    <Modal.Header closeButton>*/}
-                {/*        <Modal.Title>Update</Modal.Title>*/}
-                {/*    </Modal.Header>*/}
-                {/*    <Modal.Body> <UpdateConferenceDetailsComponent conferenceId={this.state.conferenceId}/>*/}
-                {/*    </Modal.Body>*/}
-                {/*</Modal>*/}
-
-                {/*--------------------------------------------------------------------------------*/}
 
             </div>
+
         )
     }
 }

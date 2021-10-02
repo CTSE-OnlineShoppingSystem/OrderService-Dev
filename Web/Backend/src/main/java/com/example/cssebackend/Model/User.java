@@ -9,15 +9,17 @@ public class User {
     @Id
     private String userId;
     private String userName;
+    private String password;
     private String userRole;
     private String designation;
 
     public User() {
     }
 
-    public User(String userId, String userName, String userRole, String designation) {
+    public User(String userId, String userName, String password,String userRole, String designation) {
         this.userId = userId;
         this.userName = userName;
+        this.password = password;
         this.userRole = userRole;
         this.designation = designation;
     }
@@ -52,5 +54,13 @@ public class User {
 
     public void setDesignation(String designation) {
         this.designation = designation;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

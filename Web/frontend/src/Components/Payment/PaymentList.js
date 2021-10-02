@@ -1,8 +1,12 @@
-import {Component} from "react";
+import React, {Component} from "react";
 import axios from "axios";
-import {Button, ButtonGroup, Table} from "react-bootstrap";
+import {Badge, Button, ButtonGroup, Card, Col, Container, Nav, Navbar, Row, Table} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEdit} from "@fortawesome/free-solid-svg-icons";
+import {faEdit, faPlus} from "@fortawesome/free-solid-svg-icons";
+import './Payment.css';
+import AuthenticationService from "../Login/AuthenticationService";
+import Navbar1 from '../Navbar1'
+import {alignPropType} from "react-bootstrap/types";
 
 class PaymentList extends Component{
 
@@ -30,13 +34,50 @@ class PaymentList extends Component{
                 console.log(error);
             })
     }
-
+    logout = () => {
+        AuthenticationService.logout();
+        this.props.history.push("/")
+    }
 
     render() {
         const {payments} = this.state;
         return (
-            <div className={"main-div"}>
-                <Table striped responsive hover bordered>
+
+            <div className={"background"}>
+                <div>
+                    {/*<Navbar expand="lg" className={"nav-main"}>*/}
+                    {/*    <Container>*/}
+                    {/*        <Navbar.Brand href="#home" className={"topic"}>Procurement System</Navbar.Brand>*/}
+                    {/*        <Navbar.Toggle aria-controls="basic-navbar-nav" />*/}
+                    {/*        <Navbar.Collapse id="basic-navbar-nav">*/}
+                    {/*            <Nav className="me-auto">*/}
+                    {/*                /!*<Nav.Link href="/">Home</Nav.Link>*!/*/}
+                    {/*                <Nav.Link href="/products" className={"topic-link"}>Products</Nav.Link>*/}
+                    {/*                <Nav.Link href="/orders" className={"topic-link"}>Orders</Nav.Link>*/}
+                    {/*                <Nav.Link href="/payments" className={"topic-link"}>Payments</Nav.Link>*/}
+                    {/*            </Nav>*/}
+                    {/*            <Nav>*/}
+                    {/*                <Nav.Link ><button className={"btn-logout"} onClick={this.logout}>Log Out</button></Nav.Link>*/}
+
+
+                    {/*            </Nav>*/}
+                    {/*        </Navbar.Collapse>*/}
+                    {/*    </Container>*/}
+                    {/*</Navbar>*/}
+                    <Navbar1/>
+
+                    {/*<Navbar1/>*/}
+                </div>
+                <Card className={"crd-product-tb"}>
+                    <Card.Body>
+                        <Card.Title className={"crd-product-title"}>
+                            Payment List
+                        </Card.Title>
+
+                        <div className={"main-div"}>
+
+
+                <Table striped responsive hover bordered className={"product-table"}>
                     <thead>
                     <tr>
                         <th className={"text-center"}>Payment ID</th>
@@ -60,9 +101,10 @@ class PaymentList extends Component{
                                         <td style={{verticalAlign: 'middle'}}>{payment.paymentId}</td>
                                         <td style={{verticalAlign: 'middle'}}>{payment.orderId}</td>
                                         <td style={{verticalAlign: 'middle'}}>{payment.vendorId}</td>
-                                        <td style={{verticalAlign: 'middle'}}>{payment.vendorName}</td>
+                                        <td style={{verticalAlign: 'middle'}}><Badge bg={"success"} className={"user-badge"}>{payment.vendorName}</Badge></td>
                                         <td style={{verticalAlign: 'middle'}}>{payment.date}</td>
-                                        <td style={{verticalAlign: 'middle'}}>{payment.totalAmount}</td>
+                                        <td style={{verticalAlign: 'middle'}}>Rs.{payment.totalAmount}</td>
+
                                     </tr>
                                 )
                             ]
@@ -70,6 +112,9 @@ class PaymentList extends Component{
                     </tbody>
                 </Table>
 
+                        </div>
+                    </Card.Body>
+                </Card>
 
                 {/*--------------------------Model Box to Edit Conference--------------------------*/}
 
@@ -82,6 +127,7 @@ class PaymentList extends Component{
                 {/*</Modal>*/}
 
                 {/*--------------------------------------------------------------------------------*/}
+
 
             </div>
         )

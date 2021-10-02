@@ -53,6 +53,16 @@ public class OrderController {
         }
     }
 
+    @GetMapping("/id")
+    public ResponseEntity<?> createOrderId(){
+        try {
+            return new ResponseEntity<>(orderService.createOrderId(), HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @GetMapping("/pendingOrders")
     public ResponseEntity<?> getPendingOrders(){
         try {

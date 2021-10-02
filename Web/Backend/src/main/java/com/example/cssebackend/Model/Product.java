@@ -11,15 +11,17 @@ public class Product {
     private String productName;
     private float productPrice;
     private float availability;
+    private String unit;
 
     public Product() {
     }
 
-    public Product(String productId, String productName, float productPrice, float availability) {
+    public Product(String productId, String productName, float productPrice, float availability, String unit) {
         this.productId = productId;
         this.productName = productName;
         this.productPrice = productPrice;
         this.availability = availability;
+        this.unit = unit;
     }
 
     public String getProductId() {
@@ -52,5 +54,13 @@ public class Product {
 
     public void setAvailability(float availability) {
         this.availability = availability;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 }

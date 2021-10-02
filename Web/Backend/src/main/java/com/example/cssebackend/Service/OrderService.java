@@ -7,15 +7,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class OrderService {
 
     private final OrderRepository orderRepository;
+    private final CartService cartService;
 
-    public OrderService(OrderRepository orderRepository) {
+    public OrderService(OrderRepository orderRepository, CartService cartService) {
         this.orderRepository = orderRepository;
+        this.cartService = cartService;
     }
 
     //add order
@@ -32,6 +33,10 @@ public class OrderService {
             order.setApprovalStatus("Automatically Approved");
         }
         order.setTotal(totPrice);
+        order.setPaymentStatus("Pending");
+        order.setDeliveryStatus("Pending");
+        cartService.deleteCart(order.getVendorId());
+
         orderRepository.insert(order);
     }
 

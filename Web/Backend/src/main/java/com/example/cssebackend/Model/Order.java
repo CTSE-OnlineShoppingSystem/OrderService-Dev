@@ -13,32 +13,24 @@ public class Order {
     private String vendorName;
     private String paymentStatus;
     private String approvalStatus;
+    private String deliveryStatus;
     private String deliveryDetails;
-    private String OrderDetails;
     private Item[] item;
     private float total;
 
     public Order() {
     }
 
-    public Order(String orderId, String modifiedDate, String vendorId, String vendorName, String paymentStatus, String approvalStatus, String deliveryDetails, String orderDetails, Item[] item, float total) {
+    public Order(String orderId, String modifiedDate, String vendorId, String vendorName, String paymentStatus, String approvalStatus, String deliveryStatus, String deliveryDetails, Item[] item, float total) {
         this.orderId = orderId;
         this.modifiedDate = modifiedDate;
         this.vendorId = vendorId;
         this.vendorName = vendorName;
         this.paymentStatus = paymentStatus;
         this.approvalStatus = approvalStatus;
+        this.deliveryStatus = deliveryStatus;
         this.deliveryDetails = deliveryDetails;
-        OrderDetails = orderDetails;
         this.item = item;
-        this.total = total;
-    }
-
-    public float getTotal() {
-        return total;
-    }
-
-    public void setTotal(float total) {
         this.total = total;
     }
 
@@ -90,6 +82,14 @@ public class Order {
         this.approvalStatus = approvalStatus;
     }
 
+    public String getDeliveryStatus() {
+        return deliveryStatus;
+    }
+
+    public void setDeliveryStatus(String deliveryStatus) {
+        this.deliveryStatus = deliveryStatus;
+    }
+
     public String getDeliveryDetails() {
         return deliveryDetails;
     }
@@ -98,20 +98,20 @@ public class Order {
         this.deliveryDetails = deliveryDetails;
     }
 
-    public String getOrderDetails() {
-        return OrderDetails;
-    }
-
-    public void setOrderDetails(String orderDetails) {
-        OrderDetails = orderDetails;
-    }
-
     public Item[] getItem() {
         return item;
     }
 
     public void setItem(Item[] item) {
         this.item = item;
+    }
+
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
     }
 }
 

@@ -15,4 +15,10 @@
     <string name="bow">Based On weight of 72</string>
     <string name="avlqty">Available QTY</string>
     <string name="addtocart">Add to cart</string>
+
+    <!--Purchase Order-->
+    <string name="ptitle">Purchased Order details</string>
+    <string name="d_deatils">Delivery Details</string>
+    <string name="address">Address</string>
+    <string name="save">Save</string>
 </resources>

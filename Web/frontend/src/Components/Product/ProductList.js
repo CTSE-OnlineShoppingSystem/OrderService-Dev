@@ -135,25 +135,7 @@ class ProductList extends Component{
         return (
             <div className={"background"}>
                 <div>
-                    {/*<Navbar expand="lg" className={"nav-main"}>*/}
-                    {/*    <Container>*/}
-                    {/*        <Navbar.Brand href="#home" className={"topic"}>Procurement System</Navbar.Brand>*/}
-                    {/*        <Navbar.Toggle aria-controls="basic-navbar-nav" />*/}
-                    {/*        <Navbar.Collapse id="basic-navbar-nav">*/}
-                    {/*            <Nav className="me-auto">*/}
-                    {/*                /!*<Nav.Link href="/">Home</Nav.Link>*!/*/}
-                    {/*                <Nav.Link href="/products" className={"topic-link"}>Products</Nav.Link>*/}
-                    {/*                <Nav.Link href="/orders" className={"topic-link"}>Orders</Nav.Link>*/}
-                    {/*                <Nav.Link href="/paymentList" className={"topic-link"}>Payments</Nav.Link>*/}
-                    {/*            </Nav>*/}
-                    {/*                <Nav>*/}
-                    {/*                    <Nav.Link ><button className={"btn-logout"} onClick={this.logout}>Log Out</button></Nav.Link>*/}
 
-
-                    {/*            </Nav>*/}
-                    {/*        </Navbar.Collapse>*/}
-                    {/*    </Container>*/}
-                    {/*</Navbar>*/}
 
                 <Navbar1/>
                 </div>

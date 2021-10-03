@@ -113,17 +113,7 @@ class ItemQuantity extends Component{
             total: total
         }
 
-        // const formData = new FormData();
-        // formData.append('vendorId',vendorId)
-        // formData.append('cartId', cartId)
-        // formData.append('item',array)
-        // formData.append('total',total)
-        // formData.append('productId', productId)
-        // formData.append('productName', productName)
 
-        // formData.append('availability', availability)
-        // formData.append('quantity', quantity)
-        // formData.append('productPrice', productPrice)
 
         console.log(cart);
         CartDataService.addToCart(cart)

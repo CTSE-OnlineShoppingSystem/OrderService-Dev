@@ -16,7 +16,7 @@ class UpdateProduct extends Component{
         super(props);
 
         this.state = {
-            productId: props.productId,
+            id: props.productId,
             productName:'',
             productPrice:'',
             availability:''
@@ -51,7 +51,7 @@ class UpdateProduct extends Component{
     }
 
     retrieveById = () => {
-        axios.get(`http://localhost:8080/product/getbyid/`+this.state.id)
+        axios.get(`http://localhost:8080/product/getbyid/`+this.state.productId)
             .then(response => {
                 console.log(response.data)
                 this.setState({

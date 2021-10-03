@@ -13,6 +13,7 @@ public class Availabile_Product extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_availabile_product);
+
         Button addtocartbtn = (Button) findViewById(R.id.addt_to_cart_btn);
 
         addtocartbtn.setOnClickListener(new View.OnClickListener() {

@@ -191,11 +191,11 @@ class ViewCart extends Component{
 
     }
 
-    gotoDeliveryDetails(cartId) {
+    gotoDeliveryDetails(vendorId) {
         // this.props.close();
         this.setState(
             {
-                cartId: cartId,
+                vendorId: vendorId,
                 // pop:false,
                 show:true
             }
@@ -204,7 +204,7 @@ class ViewCart extends Component{
 
     render(){
 
-        const {items,total} = this.state;
+        const {items,total,vendorId} = this.state;
         return(
 
             <div className={"wrapper-div"}>
@@ -305,22 +305,22 @@ class ViewCart extends Component{
                     <Col  md={4} >Total Amount - <Badge bg="success" className={"px-3 py-2"} key={"0"}>Rs.{total}.00</Badge></Col>
 
                     <Col md={{ span: 4, offset: 4 }}>
-                        <button className={"cnfrm-order-btn"} type={"submit"} key={this.state.cartId}
-                                onClick={() => this.gotoDeliveryDetails(this.state.cartId)}>Confirm Order</button>
+                        <button className={"cnfrm-order-btn"} type={"submit"} key={this.state.vendorId}
+                                onClick={() => this.gotoDeliveryDetails(this.state.vendorId)}>Confirm Order</button>
                     </Col>
 
                 </Row>
 
 
                 {/*------------------------ Modal Box for ViewMore Page ------------------------*/}
-                <Modal show={this.state.show}  onHide={this.closeModalBox} centered fullscreen={"sm-down"} size={"lg"}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Delivery Details</Modal.Title>
-                    </Modal.Header >
-                    <Modal.Body className={"custom-modal-body-login p-0"}>
-                        <DeliveryDetails classId={this.state.vendorId} close={this.closeModalBox} />
-                    </Modal.Body>
-                </Modal>
+                {/*<Modal show={this.state.show}  onHide={this.closeModalBox} centered fullscreen={"sm-down"} size={"lg"}>*/}
+                {/*    <Modal.Header closeButton>*/}
+                {/*        <Modal.Title>Delivery Details</Modal.Title>*/}
+                {/*    </Modal.Header >*/}
+                {/*    <Modal.Body className={"custom-modal-body-login p-0"}>*/}
+                {/*        <DeliveryDetails classId={this.state.vendorId} close={this.closeModalBox} />*/}
+                {/*    </Modal.Body>*/}
+                {/*</Modal>*/}
                 {/*------------------------------------------------------------------------------*/}
 
                 {/*------------------------ Modal Box for ViewMore Page ------------------------*/}

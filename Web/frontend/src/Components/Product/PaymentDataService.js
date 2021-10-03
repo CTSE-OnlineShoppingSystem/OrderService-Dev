@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const API_URL = 'http://localhost:8080/cart';
+const API_URL = 'http://localhost:8080/payment';
 
-class CartDataService {
+class PaymentDataService {
 
     // //get all types of templates
     // getAllTemplates() {
@@ -40,13 +40,16 @@ class CartDataService {
     //     return axios.post(`${API_URL}/addClassroom`, data)
     // }
 
-
-    addToCart(data) {
+    // addResearchTemplate(data) {
+    //     return axios.post(`${API_URL}/upload/research`, data)
+    // }
+    //
+    // editDescription(data) {
+    //     return axios.put(`${API_URL}/updateDesc`, data)
+    // }
+    //
+    addPayment(data) {
         return axios.post(`${API_URL}/`, data)
-    }
-
-    getCartById(vendorId) {
-        return axios.get(`${API_URL}/${vendorId}`)
     }
 
     // editClassroomWithFiles(data) {
@@ -59,4 +62,4 @@ class CartDataService {
 
 }
 
-export default new CartDataService();
+export default new PaymentDataService();

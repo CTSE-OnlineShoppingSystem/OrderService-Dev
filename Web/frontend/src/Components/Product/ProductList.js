@@ -28,7 +28,7 @@ class ProductList extends Component{
         super(props);
 
         this.state = {
-            id:'',
+            productId:'',
             show: false,
             display:false,
             products: [],
@@ -53,7 +53,7 @@ class ProductList extends Component{
 
     gotoUpdateProduct(id) {
         this.setState({
-            id: id,
+            productId: id,
             show: true
         })
     }
@@ -145,7 +145,7 @@ class ProductList extends Component{
                                                         <ButtonGroup>
                                                             <Button variant={"warning"} type={"submit"}
                                                                     key={product.id}
-                                                                    onClick={() => this.gotoUpdateProduct(product.id)}>
+                                                                    onClick={() => this.gotoUpdateProduct(product.productId)}>
                                                                 <FontAwesomeIcon icon={faEdit}/> Edit
                                                             </Button>
                                                         </ButtonGroup>

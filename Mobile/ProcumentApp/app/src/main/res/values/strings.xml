@@ -4,4 +4,9 @@
     <string name="user_id">User ID</string>
     <string name="password">Password</string>
     <string name="login_btn_text">Login</string>
+
+    <!--product name-->
+    <string name="pname">Product name</string>
+    <string name="pid">Product Id</string>
+    <string name="qty">QTY</string>
 </resources>

@@ -21,4 +21,9 @@
     <string name="d_deatils">Delivery Details</string>
     <string name="address">Address</string>
     <string name="save">Save</string>
+
+    <!--Orders-->
+    <string name="order_t">Orders</string>
+    <string name="add_orders">Add Odders</string>
+    <string name="confirm_order">Confirm Odder</string>
 </resources>

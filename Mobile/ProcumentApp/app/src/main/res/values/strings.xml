@@ -9,4 +9,10 @@
     <string name="pname">Product name</string>
     <string name="pid">Product Id</string>
     <string name="qty">QTY</string>
+
+    <!--Availabilty-->
+    <string name="avltitle">Availabilty</string>
+    <string name="bow">Based On weight of 72</string>
+    <string name="avlqty">Available QTY</string>
+    <string name="addtocart">Add to cart</string>
 </resources>

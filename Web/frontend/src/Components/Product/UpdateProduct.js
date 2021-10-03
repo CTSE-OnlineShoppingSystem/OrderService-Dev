@@ -35,23 +35,12 @@ class UpdateProduct extends Component{
     }
 
     componentDidMount() {
-
         this.retrieveById();
     }
 
-    refreshTable = () =>{
-        axios.get('http://localhost:8080/product/')
-            .then(response => {
-                this.setState({products: response.data})
-                console.log(response.data)
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-    }
 
     retrieveById = () => {
-        axios.get(`http://localhost:8080/product/getbyid/`+this.state.id)
+        axios.get(`http://localhost:8080/product/getbyid/`+this.state.productId)
             .then(response => {
                 console.log(response.data)
                 this.setState({
@@ -71,22 +60,14 @@ class UpdateProduct extends Component{
     handleUpdate = (e) => {
         e.preventDefault();
 
-        const productId = this.state.productId;
-        const productName = this.state.productName;
-        const productPrice = this.state.productPrice;
-        const availability = this.state.availability
+        const product = {
+            productId: this.state.productId,
+            productName: this.state.productName,
+            productPrice: this.state.productPrice,
+            availability: this.state.availability
+        }
 
-
-            // update all including files
-            console.log("UPDATING FILE...");
-
-            const formData = new FormData();
-            formData.append('productId', productId)
-            formData.append('productName', productName)
-            formData.append('productPrice', productPrice)
-            formData.append('availability', availability)
-
-            ProductDataService.updateProduct(formData, config)
+        axios.post('http://localhost:8080/product/', product)
                 .then(res => {
                     console.log(res);
 
@@ -102,7 +83,6 @@ class UpdateProduct extends Component{
                         })
 
                         this.props.close();
-                        this.refreshTable();
                     } else {
                         Swal.fire({
                             icon: 'error',
@@ -114,9 +94,6 @@ class UpdateProduct extends Component{
                         })
                     }
                 })
-
-            this.refreshTable();
-
         }
 
 
@@ -136,7 +113,7 @@ class UpdateProduct extends Component{
 
                         <Form.Group >
                             <Form.Label >Product ID</Form.Label>
-                            <Form.Control  as={"input"} name={"productId"} placeholder={"Enter a product id"}  required
+                            <Form.Control  as={"input"} name={"productId"} placeholder={"Enter a product id"}  required disabled
                                            value={productId} onChange={this.handleChange}/>
                         </Form.Group>
 

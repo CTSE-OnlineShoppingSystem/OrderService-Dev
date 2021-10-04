@@ -4,58 +4,48 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+
+import com.tutorial.procumentapp.models.Product;
+
+import java.util.List;
 
 public class Product_List extends AppCompatActivity implements ProductRecyclerAdapter.OnJobListener {
 
-    public static final String JOB_DETAILS = "JOB";
+    private RecyclerView recyclerView;
+    private ProductRecyclerAdapter productRecyclerAdapter;
 
-    final String[] JOB_TITLES = {
-            "Senior Software Engineer",
-            "IT Business System Analyst",
-            "Tech Lead - C# / .Net"
-    };
+    private List<Product> products;
 
-    final String[] COMPANY_NAMES = {
-            "Persistent Systems Lanka (Pvt) Ltd",
-            "Sri Lankan Airlines Ltd",
-            "HCL Technologies Lanka (Pvt) Ltd"
-    };
-
-    final String[] POSTED_DATES = {
-            "10/09/2021",
-            "09/09/2021",
-            "09/09/2021"
-    };
+    // Constant to pass product id with intent
+    private static final String KEY = "PRODUCT_ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_list);
-        setContentView(R.layout.activity_product_list);
-  /*      Button applied_button = (Button) findViewById(R.id.applied_button);*/
 
-
-
-
+        initRecyclerView();
     }
 
+    /**
+     * This method initialize the recycler view
+     */
     private void initRecyclerView() {
-        // initialize
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.product_recycler);
+        recyclerView = (RecyclerView) findViewById(R.id.product_recycler);
 
-        ProductRecyclerAdapter favJobsRecyclerAdapter = new ProductRecyclerAdapter(getApplicationContext(), JOB_TITLES, COMPANY_NAMES, POSTED_DATES, this);
-        recyclerView.setAdapter(favJobsRecyclerAdapter);
+        productRecyclerAdapter = new ProductRecyclerAdapter(getApplicationContext(), products, this);
+        recyclerView.setAdapter(productRecyclerAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
     }
     @Override
     public void onItemClick(int position) {
-
-    }
-
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
+        Intent product = new Intent(Product_List.this, Availability.class);
+        product.putExtra(KEY, position);
+        product.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(product);
     }
 
 

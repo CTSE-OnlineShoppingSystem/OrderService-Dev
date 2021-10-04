@@ -12,20 +12,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
+import com.tutorial.procumentapp.models.Product;
+
+import java.util.List;
 
 public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecyclerAdapter.ViewHolder> {
 
     private final Context context;
-    private final String[] job_titles;
-    private final String[] company_names;
-    private final String[] posted_dates;
+    private List<Product> productList;
     private final OnJobListener jobListener;
 
-    public ProductRecyclerAdapter(Context context, String[] job_titles, String[] company_names, String[] posted_dates, OnJobListener jobListener) {
+    public ProductRecyclerAdapter(Context context, List<Product> productList, OnJobListener jobListener) {
         this.context = context;
-        this.job_titles = job_titles;
-        this.company_names = company_names;
-        this.posted_dates = posted_dates;
+        this.productList = productList;
         this.jobListener = jobListener;
     }
 
@@ -37,39 +36,44 @@ public class ProductRecyclerAdapter extends RecyclerView.Adapter<ProductRecycler
         return new ViewHolder(view, jobListener);
     }
 
-    @SuppressLint("RecyclerView")
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        // set data to the recycling item
+        Product resultItem = productList.get(position);
 
-        holder.jobTitle.setText(job_titles[position]);
-        holder.company.setText(company_names[position]);
-        holder.postedDate.setText(posted_dates[position]);
-     /*   holder.favButton.setImageResource(R.drawable.fav_icon);*/
-        /*holder.favButton.setColorFilter(ContextCompat.getColor(context, R.color.chinese_silver), android.graphics.PorterDuff.Mode.SRC_IN);*/
+        holder.productName.setText(resultItem.getProductName());
+        holder.qty.setText("QTY: " + resultItem.getAvailability());
+
+        if (resultItem.getAvailability() > 0) {
+            holder.availability.setText("In Stock");
+        } else {
+            holder.availability.setText("Out of Stock");
+        }
+
     }
 
     @Override
     public int getItemCount() {
-        return job_titles.length;
+        return productList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         MaterialCardView materialCardView;
-        TextView jobTitle;
-        TextView company;
-        TextView postedDate;
-        ImageButton favButton;
+        TextView productName;
+        TextView qty;
+        TextView availability;
         OnJobListener onJobListener;
 
         public ViewHolder(@NonNull View itemView, OnJobListener onJobListener) {
             super(itemView);
 
             materialCardView = (MaterialCardView) itemView.findViewById(R.id.product_card_layout);
-            jobTitle = (TextView) itemView.findViewById(R.id.product_title);
-            company = (TextView) itemView.findViewById(R.id.prodcut_name);
-         /*   favButton = (ImageButton) itemView.findViewById(R.id.);*/
-            postedDate = (TextView) itemView.findViewById(R.id.job_posted_date);
+            productName = (TextView) itemView.findViewById(R.id.product_name);
+            qty = (TextView) itemView.findViewById(R.id.qty_label);
+            availability = (TextView) itemView.findViewById(R.id.availability);
+
             this.onJobListener = onJobListener;
 
             itemView.setOnClickListener(this);

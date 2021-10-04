@@ -4,8 +4,8 @@ public class Product {
 
     private String productId;
     private String productName;
-    private float productPrice;
-    private float availability;
+    private Double productPrice;
+    private Double availability;
     private String unit;
 
     public Product() {
@@ -27,19 +27,19 @@ public class Product {
         this.productName = productName;
     }
 
-    public float getProductPrice() {
+    public Double getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(float productPrice) {
+    public void setProductPrice(Double productPrice) {
         this.productPrice = productPrice;
     }
 
-    public float getAvailability() {
+    public Double getAvailability() {
         return availability;
     }
 
-    public void setAvailability(float availability) {
+    public void setAvailability(Double availability) {
         this.availability = availability;
     }
 

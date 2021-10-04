@@ -7,6 +7,7 @@ import AddProducts from "./Product/AddProducts";
 import PaymentList from "./Payment/PaymentList";
 import Login from "./Login/Login"
 import Home from "./Home";
+import DeliveryDetails from "./Product/DeliveryDetails";
 
 class Frontend extends Component {
 
@@ -21,6 +22,7 @@ class Frontend extends Component {
                         <Route path="/addProduct" exact component={AddProducts}/>
                         <Route path="/paymentList" exact component={PaymentList}/>
                         <Route path="/login" exact component={Login}/>
+                        <Route path="/deliveryDetails" exact component={DeliveryDetails}/>
                     </Switch>
                 </Router>
             </div>

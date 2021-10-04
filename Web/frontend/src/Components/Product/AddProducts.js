@@ -44,8 +44,8 @@ class AddProducts extends Component{
                         icon: 'success',
                         title: 'Successful',
                         html: '<p>Product added successfully!!</p>',
-                        background: '#041c3d',
-                        confirmButtonColor: '#3aa2e7',
+                        background: '#fff',
+                        confirmButtonColor: '#1836d2',
                         iconColor: '#60e004'
                     })
                     // this.clearData();
@@ -55,9 +55,8 @@ class AddProducts extends Component{
                         icon: 'error',
                         title: 'Error',
                         html: '<p>There was an error adding product!!</p>',
-                        background: '#041c3d',
-                        showConfirmButton: false,
-                        timer: 1500,
+                        background: '#fff',
+                        confirmButtonColor: '#1836d2',
                         iconColor: '#e00404'
                     })
                 }

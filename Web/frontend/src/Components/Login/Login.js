@@ -40,9 +40,10 @@ class Login extends Component {
         if (this.state.userId === '' || this.state.password === '') {
             Swal.fire({
                 icon: 'warning',
-                title: 'Fileds cannot be empty',
-                background: '#051365',
-                confirmButtonColor: '#3aa2e7',
+                title: 'Error',
+                background: '#fff',
+                html: '<p>Fields Cannot be empty</p>',
+                confirmButtonColor: '#1836d2',
                 iconColor: '#cc1919'
             })
         } else {
@@ -64,19 +65,21 @@ class Login extends Component {
                             } else {
                                 Swal.fire({
                                     icon: 'error',
-                                    title: 'Wrong userId or password',
-                                    background: '#041c3d',
+                                    title: 'Error!',
+                                    html: '<p>Error in login</p>',
+                                    background: '#fff',
                                     iconColor: '#e00404',
-                                    confirmButtonColor: '#3aa2e7'
+                                    confirmButtonColor: '#1836d2'
                                 })
                             }
                         } else {
                             Swal.fire({
                                 icon: 'error',
-                                title: 'Wrong userId or password',
-                                background: '#041c3d',
+                                title: 'Error!',
+                                html: '<p>Wrong userId or password</p>',
+                                background: '#fff',
                                 iconColor: '#e00404',
-                                confirmButtonColor: '#3aa2e7'
+                                confirmButtonColor: '#1836d2'
                             })
                         }
                     }

@@ -84,6 +84,7 @@ class ItemQuantity extends Component{
     handleAddToCart = (e) => {
         e.preventDefault();
 
+        const availability = this.state.availability;
         const vendorId = this.state.vendorId;
         const cartId = this.state.cartId;
         // const productId = this.state.productId;
@@ -113,37 +114,50 @@ class ItemQuantity extends Component{
             total: total
         }
 
+    if(this.state.quantity < this.state.availability) {
 
+    console.log(cart);
+    CartDataService.addToCart(cart)
+        .then(res => {
+            console.log(res);
 
-        console.log(cart);
-        CartDataService.addToCart(cart)
-            .then(res => {
-                console.log(res);
+            if (res.status === 200) {
 
-                if (res.status === 200) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Successful',
+                    text: 'Added to cart successfully!!',
+                    background: '#fff',
+                    confirmButtonColor: '#1836d2',
+                    iconColor: '#60e004'
+                })
 
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Successful',
-                        text: 'Added to cart successfully!!',
-                        background: '#fff',
-                        confirmButtonColor: '#333533',
-                        iconColor: '#60e004'
-                    })
+                this.props.close();
+                this.refreshTable();
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!!',
+                    text: 'There is an error in adding the item',
+                    background: '#fff',
+                    confirmButtonColor: '#1836d2',
+                    iconColor: '#e00404'
+                })
+            }
+        })
 
-                    this.props.close();
-                    this.refreshTable();
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Error in adding!',
-                        background: '#fff',
-                        confirmButtonColor: '#333533',
-                        iconColor: '#e00404'
-                    })
-                }
-            })
+}else{
+    Swal.fire({
+        icon: 'error',
+        title: 'Sorry!!',
+        text: 'We do not have enough products to process the order',
+        background: '#fff',
+        confirmButtonColor: '#1836d2',
+        iconColor: '#e00404',
+
+    })
+
+}
 
         this.refreshTable();
 

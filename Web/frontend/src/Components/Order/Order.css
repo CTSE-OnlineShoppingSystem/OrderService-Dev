@@ -8,6 +8,7 @@
     border-radius: 20px;
     border-style: solid;
     border-color: silver;
+    responsive:true;
     /*box-shadow: silver;*/
 
 }
@@ -117,8 +118,9 @@
 
     align-content: center;
     margin: 10px auto 20px;
-    height: fit-content;
+
     max-width: fit-content;
+    /*max-height: fit-content;*/
     /*border-style: solid;*/
 
 

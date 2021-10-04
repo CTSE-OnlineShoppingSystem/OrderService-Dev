@@ -49,7 +49,7 @@ class PaymentDataService {
     // }
     //
     getDummyDetails(cardNo) {
-        return axios.post(`${API_URL}/${cardNo}`)
+        return axios.get(`${API_URL}/${cardNo}`)
     }
 
     // editClassroomWithFiles(data) {

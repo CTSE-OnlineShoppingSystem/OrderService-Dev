@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = 'http://localhost:8080/payment';
+const API_URL = 'http://localhost:8080/paymentDummy';
 
 class PaymentDataService {
 
@@ -48,8 +48,8 @@ class PaymentDataService {
     //     return axios.put(`${API_URL}/updateDesc`, data)
     // }
     //
-    addPayment(data) {
-        return axios.post(`${API_URL}/`, data)
+    getDummyDetails(cardNo) {
+        return axios.get(`${API_URL}/${cardNo}`)
     }
 
     // editClassroomWithFiles(data) {

@@ -1,100 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/product_card_layout"
     android:layout_width="match_parent"
-    android:layout_height="110dp"
-    android:layout_marginRight="@dimen/card_layout_margin"
-    android:layout_marginLeft="@dimen/screen_padding"
-    android:layout_marginStart="@dimen/screen_padding"
-    android:layout_marginEnd="@dimen/card_layout_margin"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
-    android:background="@color/white"
+    android:layout_height="wrap_content"
+    android:clickable="false"
     android:gravity="center"
     android:orientation="vertical"
-    app:cardCornerRadius="@dimen/card_corner_radius"
-    app:cardElevation="@dimen/card_elevation"
-    app:cardMaxElevation="@dimen/card_max_elevation"
-    app:strokeColor="@color/chinese_silver"
-    app:strokeWidth="@dimen/card_stroke_width">
+    app:strokeColor="@color/black">
 
-
-    <LinearLayout
-        android:id="@+id/product_card_layout_main_linear"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/product_card_layout_1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:padding="18dp">
 
-        <LinearLayout
-            android:id="@+id/product_card_linear_left"
-            android:layout_width="280dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="start">
+        <TextView
+            android:id="@+id/product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:text="@string/pname"
+            android:textColor="@color/black"
+            android:textSize="@dimen/card_main_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/product_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:gravity="center"
-                android:text="@string/pid"
-                android:textColor="@color/black"
-                android:textSize="@dimen/card_main_text" />
+        <TextView
+            android:id="@+id/qty_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:paddingLeft="10dp"
+            android:paddingTop="2dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="2dp"
+            android:text="@string/qty"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/availability"
+            app:layout_constraintStart_toEndOf="@+id/product_name"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/prodcut_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="@string/pname"
-                android:textColor="@color/black"
-                android:textSize="@dimen/card_secondary_text" />
+        <TextView
+            android:id="@+id/availability"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="end"
+            android:paddingLeft="10dp"
+            android:paddingTop="2dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="2dp"
+            android:text="@string/availability"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/availabilty"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_launcher_foreground"
-                android:fontFamily="@font/poppins_regular"
-                android:paddingLeft="10dp"
-                android:paddingTop="2dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="2dp"
-                android:text="@string/qty"
-                android:textColor="@color/black"
-                android:textSize="@dimen/card_small_text" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/product_card_linear_right"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="end">
-
-
-
-            <TextView
-                android:id="@+id/job_posted_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:fontFamily="@font/poppins_regular"
-                android:text=""
-                android:textColor="@color/black"
-                android:textSize="@dimen/card_small_text" />
-
-        </LinearLayout>
-
-
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </com.google.android.material.card.MaterialCardView>

@@ -3,9 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Projects/Procurement System/implementation-walkthrough-2021s2_reg_we_29/Mobile/ProcumentApp/app/src/main/res/drawable/background_blue.xml" value="0.3828125" />
+        <entry key="..\:/Projects/Procurement System/implementation-walkthrough-2021s2_reg_we_29/Mobile/ProcumentApp/app/src/main/res/drawable/buyitem.xml" value="0.3537037037037037" />
+        <entry key="..\:/Projects/Procurement System/implementation-walkthrough-2021s2_reg_we_29/Mobile/ProcumentApp/app/src/main/res/drawable/logoWtext.xml" value="0.3828125" />
+        <entry key="..\:/Projects/Procurement System/implementation-walkthrough-2021s2_reg_we_29/Mobile/ProcumentApp/app/src/main/res/drawable/orderlist.xml" value="0.3537037037037037" />
         <entry key="..\:/Projects/Procurement System/implementation-walkthrough-2021s2_reg_we_29/Mobile/ProcumentApp/app/src/main/res/font/poppins.xml" value="0.23541666666666666" />
         <entry key="..\:/Projects/Procurement System/implementation-walkthrough-2021s2_reg_we_29/Mobile/ProcumentApp/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
-        <entry key="..\:/Projects/Procurement System/implementation-walkthrough-2021s2_reg_we_29/Mobile/ProcumentApp/app/src/main/res/layout/product_item.xml" value="0.20520833333333333" />
+        <entry key="..\:/Projects/Procurement System/implementation-walkthrough-2021s2_reg_we_29/Mobile/ProcumentApp/app/src/main/res/layout/activity_main_menu.xml" value="0.33" />
+        <entry key="..\:/Projects/Procurement System/implementation-walkthrough-2021s2_reg_we_29/Mobile/ProcumentApp/app/src/main/res/layout/activity_product_list.xml" value="0.36666666666666664" />
+        <entry key="..\:/Projects/Procurement System/implementation-walkthrough-2021s2_reg_we_29/Mobile/ProcumentApp/app/src/main/res/layout/product_item.xml" value="0.5" />
         <entry key="..\:/Users/INSIGHT/Desktop/implementation-walkthrough-2021s2_reg_we_29/Mobile/ProcumentApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/INSIGHT/Desktop/implementation-walkthrough-2021s2_reg_we_29/Mobile/ProcumentApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/INSIGHT/Desktop/implementation-walkthrough-2021s2_reg_we_29/Mobile/ProcumentApp/app/src/main/res/layout/Product_item.xml" value="0.15260416666666668" />

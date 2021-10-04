@@ -17,7 +17,6 @@
     <dimen name="card_corner_radius">10dp</dimen>
     <dimen name="card_elevation">5dp</dimen>
     <dimen name="card_max_elevation">10dp</dimen>
-    <dimen name="card_stroke_width">2dp</dimen>
     <dimen name="card_layout_margin">16dp</dimen>
     <dimen name="badge_layout_margin">5dp</dimen>
     <dimen name="job_type_badge_corner_radius">25dp</dimen>

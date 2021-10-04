@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import CartDataService from "./CartDataService";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCartPlus, faCross, faEdit, faPlus, faTimes} from "@fortawesome/free-solid-svg-icons";
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import DeliveryDetails from "./DeliveryDetails";
 
 class ViewCart extends Component{
@@ -169,7 +169,7 @@ class ViewCart extends Component{
                         title: 'Successful',
                         text: 'Added to cart successfully!!',
                         background: '#fff',
-                        confirmButtonColor: '#333533',
+                        confirmButtonColor: '#1836d2',
                         iconColor: '#60e004'
                     })
 
@@ -179,9 +179,9 @@ class ViewCart extends Component{
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: 'Error in adding!',
+                        text: 'Error in adding to cart!',
                         background: '#fff',
-                        confirmButtonColor: '#333533',
+                        confirmButtonColor: '#1836d2',
                         iconColor: '#e00404'
                     })
                 }
@@ -197,9 +197,50 @@ class ViewCart extends Component{
             {
                 vendorId: vendorId,
                 // pop:false,
-                show:true
+                // show:true
             }
         )
+        this.props.history.push("/deliveryDetails/");
+    }
+
+    deleteItem = (vendorId,itemId) => {
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Once deleted, you will not be able to recover this record!",
+            icon: 'warning',
+            background: '#fff',
+            confirmButtonColor: '#1836d2',
+            iconColor: '#ffc200',
+            showCancelButton: true,
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Delete'
+        }).then((result) => {
+
+            if (result.isConfirmed) {
+                axios.put('http://localhost:8080/cart/' +vendorId+'/'+itemId)
+                    .then(res => {
+
+                        console.log(res.status);
+                        if (res.status === 200) {
+
+
+
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Successful',
+                                text: "Item has been deleted!!",
+                                background: '#fff',
+                                confirmButtonColor: '#1836d2',
+                                iconColor: '#60e004'
+                            })
+
+                            this.retrieveById();
+                        }
+                    });
+            }
+        })
+
     }
 
     render(){
@@ -208,29 +249,7 @@ class ViewCart extends Component{
         return(
 
             <div className={"wrapper-div"}>
-                {/*<Form onSubmit={this.handleAddToCart}>*/}
 
-                {/*    <div className={"detail-box-section"}>*/}
-                {/*        <div className={"detail-group-left-title"}><label>Vendor ID </label></div>*/}
-                {/*        <div className={"detail-group-right-text"}><input type = "text"*/}
-                {/*                                                          required*/}
-                {/*                                                          disabled*/}
-                {/*                                                          className = "form-control"*/}
-                {/*                                                          value = {vendorId}*/}
-                {/*                                                          placeholder={"Enter Product ID"}*/}
-                {/*        /></div>*/}
-                {/*    </div>*/}
-
-                {/*    <div className={"detail-box-section"}>*/}
-                {/*        <div className={"detail-group-left-title"}><label>Cart ID </label></div>*/}
-                {/*        <div className={"detail-group-right-text"}><input type = "text"*/}
-                {/*                                                          required*/}
-                {/*                                                          disabled*/}
-                {/*                                                          className = "form-control"*/}
-                {/*                                                          value = {cartId}*/}
-                {/*                                                          placeholder={"Enter Product ID"}*/}
-                {/*        /></div>*/}
-                {/*    </div>*/}
                     <Table striped responsive hover bordered >
                         <thead>
                         <tr>
@@ -249,7 +268,7 @@ class ViewCart extends Component{
                                         <td style={{verticalAlign: 'middle'}}>{item.quantity}</td>
                                         <td style={{verticalAlign: 'middle'}}>
                                             <ButtonGroup>
-                                                <Button variant={"danger"} type={"submit"}><FontAwesomeIcon icon={faTimes}/></Button>
+                                                <Button variant={"danger"} type={"submit"} key={items.vendorId} onClick={() => this.deleteItem(items.vendorId,item.itemId)}><FontAwesomeIcon icon={faTimes}/></Button>
                                             </ButtonGroup>
 
                                         </td>
@@ -263,43 +282,7 @@ class ViewCart extends Component{
                         </tbody>
                     </Table>
 
-                {/*<div className={"detail-box-section"}>*/}
-                    {/*    <div className={"detail-group-left-title"}><label>Product Price </label></div>*/}
-                    {/*    <div className={"detail-group-right-text"}><input type = "text"*/}
-                    {/*                                                      required*/}
-                    {/*                                                      className = "form-control"*/}
-                    {/*                                                      disabled*/}
-                    {/*                                                      value = {itemName}*/}
 
-                    {/*                                                      placeholder={"Enter Product Price"}*/}
-                    {/*    /></div>*/}
-                    {/*</div>*/}
-
-                    {/*<div className={"detail-box-section"}>*/}
-                    {/*    <div className={"detail-group-left-title"}><label>Product Availability </label></div>*/}
-                    {/*    <div className={"detail-group-right-text"}> <input type = "text"*/}
-                    {/*                                                       required*/}
-                    {/*                                                       className = "form-control"*/}
-                    {/*                                                       disabled*/}
-                    {/*                                                       value = {availability}*/}
-
-                    {/*                                                       placeholder={"Enter Product Availability"}*/}
-                    {/*    /></div>*/}
-                    {/*</div>*/}
-                    {/*<div className={"detail-box-section"}>*/}
-                    {/*    <div className={"detail-group-left-title"}><label>Enter Quantity </label></div>*/}
-                    {/*    <div className={"detail-group-right-text"}> <input type = "text"*/}
-                    {/*                                                       required*/}
-                    {/*                                                       className = "form-control"*/}
-
-                    {/*                                                       value = {this.state.quantity}*/}
-                    {/*                                                       onChange = {this.onChangeQuantity}*/}
-                    {/*                                                       placeholder={"Enter Product Quantity"}*/}
-                    {/*    /></div>*/}
-                    {/*</div>*/}
-
-                    {/*<div className={"total-price"}>Total Amount -  <Badge bg="primary" className={"px-3 py-2"} key={"0"}>Rs.{total}.00</Badge></div>*/}
-                    {/*<div className={"cnfrm-order-btn-corner"}><button className={"cnfrm-order-btn"} type={"submit"} >Add Product</button></div>*/}
 
                 <Row>
                     <Col  md={4} >Total Amount - <Badge bg="success" className={"px-3 py-2"} key={"0"}>Rs.{total}.00</Badge></Col>
@@ -312,33 +295,12 @@ class ViewCart extends Component{
                 </Row>
 
 
-                {/*------------------------ Modal Box for ViewMore Page ------------------------*/}
-                {/*<Modal show={this.state.show}  onHide={this.closeModalBox} centered fullscreen={"sm-down"} size={"lg"}>*/}
-                {/*    <Modal.Header closeButton>*/}
-                {/*        <Modal.Title>Delivery Details</Modal.Title>*/}
-                {/*    </Modal.Header >*/}
-                {/*    <Modal.Body className={"custom-modal-body-login p-0"}>*/}
-                {/*        <DeliveryDetails classId={this.state.vendorId} close={this.closeModalBox} />*/}
-                {/*    </Modal.Body>*/}
-                {/*</Modal>*/}
-                {/*------------------------------------------------------------------------------*/}
 
-                {/*------------------------ Modal Box for ViewMore Page ------------------------*/}
-                {/*<Modal show={this.state.pop} onHide={this.closeCart} centered fullscreen={"sm-down"} size={"lg"}>*/}
-                {/*    <Modal.Header closeButton>*/}
-                {/*        <Modal.Title>Your Cart</Modal.Title>*/}
-                {/*    </Modal.Header >*/}
-                {/*    <Modal.Body className={"custom-modal-body-login p-0"}>*/}
-                {/*        <ViewCart classId={this.state.vendorId} close={this.closeCart} />*/}
-                {/*    </Modal.Body>*/}
-                {/*</Modal>*/}
-                {/*------------------------------------------------------------------------------*/}
-
-                {/*</Form>*/}
             </div>
         )
     }
 
 
+
 }
-export default ViewCart;
+export default withRouter(ViewCart);

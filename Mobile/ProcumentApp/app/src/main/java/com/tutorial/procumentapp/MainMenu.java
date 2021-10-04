@@ -23,7 +23,7 @@ public class MainMenu extends AppCompatActivity {
         placeOrder = findViewById(R.id.orderCardBtn);
         orderList = findViewById(R.id.orderListCardBtn);
 
-        Log.e("TAG", Login.USER_ID );
+        Log.i("TAG", Login.USER_ID );
 
         // Go to product list if button clicked
         placeOrder.setOnClickListener(new View.OnClickListener() {

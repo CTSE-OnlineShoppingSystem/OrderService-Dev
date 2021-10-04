@@ -40,6 +40,21 @@ class Navbar1 extends  Component{
             loggedInUsername,
             loadContent
         } = this.state
+
+        const loggedUserRole = AuthenticationService.loggedUserRole();
+        let loggedAsManagementStaff = false;
+        let loggedAsAccountingStaff = false;
+        let loggedAsSiteManager = false;
+
+        if (loggedUserRole != null && loggedUserRole === 'Management Staff') {
+            loggedAsManagementStaff = true;
+        }
+        if (loggedUserRole != null && loggedUserRole === 'Accounting Staff') {
+            loggedAsAccountingStaff = true;
+        }
+        if (loggedUserRole != null && loggedUserRole === 'Site Manager') {
+            loggedAsSiteManager = true;
+        }
         return (
 
 
@@ -50,52 +65,23 @@ class Navbar1 extends  Component{
                         <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                         {isUserLoggedIn &&
                             <Navbar.Collapse id="basic-navbar-nav">
-                        {/*{this.state.isUserLoggedIn === "true" &&*/}
-                        {/*<Nav className="me-auto">*/}
-                        {/*    <Nav.Link href="/">Home</Nav.Link>*/}
-                        {/*</Nav>*/}
-                        {/*}*/}
-                        {/*{this.state.userRole === "Accounting Staff" &&*/}
-                        {/*    <Nav className="me-auto">*/}
-                        {/*    <Nav.Link href="/products" className={"topic-link"}>Products</Nav.Link>*/}
-                        {/*    <Nav.Link href="/orders" className={"topic-link"}>Orders</Nav.Link>*/}
-                        {/*    <Nav.Link href="/paymentList" className={"topic-link"}>Payment</Nav.Link>*/}
 
-                        {/*    </Nav>*/}
-                        {/*}*/}
-                        {/*{this.state.userRole === "Management Staff" &&*/}
-                        {/*    <Nav className="me-auto">*/}
-                        {/*    <Nav.Link href="/products" className={"topic-link"}>Products</Nav.Link>*/}
-                        {/*    <Nav.Link href="/orders" className={"topic-link"}>Orders</Nav.Link>*/}
-                        {/*    <Nav.Link href="/paymentList" className={"topic-link"}>Payment</Nav.Link>*/}
 
-                        {/*    </Nav>*/}
-                        {/*}*/}
-                        {/*{this.state.userRole === "Site Manager" &&*/}
-                        {/*<Nav className="me-auto">*/}
-                        {/*    <Nav.Link href="/products" className={"topic-link"}>Products</Nav.Link>*/}
-                        {/*    <Nav.Link href="/orders" className={"topic-link"}>Orders</Nav.Link>*/}
-                        {/*    <Nav.Link href="/paymentList" className={"topic-link"}>Payment</Nav.Link>*/}
+                                <Nav className="me-auto">
+                                    <Nav.Link href="/products" className={"topic-link"}>Products</Nav.Link>
+                                    {!loggedAsSiteManager &&
+                                    <Nav.Link href="/orders" className={"topic-link"}>Orders</Nav.Link>}
+                                    {!loggedAsSiteManager &&
+                                        <Nav.Link href="/paymentList" className={"topic-link"} >Payment</Nav.Link>
+                                    }
+                                </Nav>
 
-                        {/*</Nav>*/}
-                        {/*}*/}
-
-                            <Nav className="me-auto">
-                            <Nav.Link href="/products" className={"topic-link"}>Products</Nav.Link>
-                            <Nav.Link href="/orders" className={"topic-link"}>Orders</Nav.Link>
-                            <Nav.Link href="/paymentList" className={"topic-link"}>Payment</Nav.Link>
-                            </Nav>
                             <Nav>
                                 <Nav.Link className = {"dp-name"}>Hii {this.state.loggedInUsername}</Nav.Link>
                             <Nav.Link ><button className={"btn-logout"} onClick={this.logout}>Log Out</button></Nav.Link>
-                            {/*    <Nav.Link href="#pricing">Hii {this.state.loggedInUsername}</Nav.Link>*/}
-                            {/*    <NavDropdown id="collasible-nav-dropdown">*/}
-                            {/*        <NavDropdown.Item onClick={this.logout}>Log Out</NavDropdown.Item>*/}
-                            {/*    </NavDropdown>*/}
-
-
 
                             </Nav>
+
 
 
                             </Navbar.Collapse>

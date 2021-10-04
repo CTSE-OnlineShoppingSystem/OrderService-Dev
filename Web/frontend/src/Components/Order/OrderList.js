@@ -98,8 +98,8 @@ class OrderList extends Component{
                         icon: 'success',
                         title: 'Successful',
                         html: '<p>Order approved successfully!!</p>',
-                        background: '#041c3d',
-                        confirmButtonColor: '#3aa2e7',
+                        background: '#fff',
+                        confirmButtonColor: '#1836d2',
                         iconColor: '#60e004'
                     })
                     this.refreshTable();
@@ -109,9 +109,8 @@ class OrderList extends Component{
                         icon: 'error',
                         title: 'Error',
                         html: '<p>There was an error approving the order!!</p>',
-                        background: '#041c3d',
-                        showConfirmButton: false,
-                        timer: 1500,
+                        background: '#fff',
+                        confirmButtonColor: '#1836d2',
                         iconColor: '#e00404'
                     })
                 }
@@ -129,8 +128,8 @@ class OrderList extends Component{
                         icon: 'success',
                         title: 'Successful',
                         html: '<p>Order rejected successfully!!</p>',
-                        background: '#041c3d',
-                        confirmButtonColor: '#3aa2e7',
+                        background: '#fff',
+                        confirmButtonColor: '#1836d2',
                         iconColor: '#60e004'
                     })
                      this.refreshTable();
@@ -140,9 +139,8 @@ class OrderList extends Component{
                         icon: 'error',
                         title: 'Error',
                         html: '<p>There was an error rejecting the order!!</p>',
-                        background: '#041c3d',
-                        showConfirmButton: false,
-                        timer: 1500,
+                        background: '#fff',
+                        confirmButtonColor: '#1836d2',
                         iconColor: '#e00404'
                     })
                 }
@@ -157,6 +155,7 @@ class OrderList extends Component{
     render() {
         const {orders} = this.state;
         return (
+            <div>
             <div className={"background"}>
                 <div>
                     {/*<Navbar expand="lg" className={"nav-main"}>*/}
@@ -164,21 +163,24 @@ class OrderList extends Component{
                     {/*        <Navbar.Brand href="#home" className={"topic"}>Procurement System</Navbar.Brand>*/}
                     {/*        <Navbar.Toggle aria-controls="basic-navbar-nav" />*/}
                     {/*        <Navbar.Collapse id="basic-navbar-nav">*/}
+                    {/*            {this.state.userRole === "Site Manager" &&*/}
                     {/*            <Nav className="me-auto">*/}
                     {/*                /!*<Nav.Link href="/">Home</Nav.Link>*!/*/}
                     {/*                <Nav.Link href="/products" className={"topic-link"}>Products</Nav.Link>*/}
-                    {/*                <Nav.Link href="/orders" className={"topic-link"}>Orders</Nav.Link>*/}
-                    {/*                <Nav.Link href="/paymentList" className={"topic-link"}>Payments</Nav.Link>*/}
-                    {/*            </Nav>*/}
+                    {/*                */}
+                    {/*            </Nav>}*/}
+                    {/*            {this.state.userRole === "Site Manager" &&*/}
                     {/*            <Nav>*/}
                     {/*                <Nav.Link ><button className={"btn-logout"} onClick={this.logout}>Log Out</button></Nav.Link>*/}
 
 
                     {/*            </Nav>*/}
+                    {/*            }*/}
                     {/*        </Navbar.Collapse>*/}
                     {/*    </Container>*/}
                     {/*</Navbar>*/}
                     <Navbar1/>
+
                 </div>
                 <Card className={"crd-order-tb"}>
                     <Card.Body>
@@ -200,7 +202,7 @@ class OrderList extends Component{
                             </ButtonGroup>
                         </div>
 
-                        <Table striped responsive hover bordered className={"order-table"}>
+                        <Table striped responsive="xl" hover bordered className={"order-table"}>
                             <thead>
                             <tr>
                                 <th className={"text-center"}>Order ID</th>
@@ -354,6 +356,7 @@ class OrderList extends Component{
 
 
 
+            </div>
             </div>
 
         )

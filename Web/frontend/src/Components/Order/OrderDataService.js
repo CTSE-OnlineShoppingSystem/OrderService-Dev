@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const API_URL = 'http://localhost:8080/paymentDummy';
+const API_URL = 'http://localhost:8080/order';
 
-class PaymentDataService {
+class OrderDataService {
 
     // //get all types of templates
     // getAllTemplates() {
@@ -36,9 +36,9 @@ class PaymentDataService {
     //     return axios.get(`${API_URL}/image/${id}`, {responseType: 'blob'})
     // }
     //
-    // addClassroom(data) {
-    //     return axios.post(`${API_URL}/addClassroom`, data)
-    // }
+    addOrder(data) {
+        return axios.post(`${API_URL}/`, data)
+    }
 
     // addResearchTemplate(data) {
     //     return axios.post(`${API_URL}/upload/research`, data)
@@ -48,9 +48,9 @@ class PaymentDataService {
     //     return axios.put(`${API_URL}/updateDesc`, data)
     // }
     //
-    getDummyDetails(cardNo) {
-        return axios.get(`${API_URL}/${cardNo}`)
-    }
+    // getDummyDetails(cardNo) {
+    //     return axios.post(`${API_URL}/${cardNo}`)
+    // }
 
     // editClassroomWithFiles(data) {
     //     return axios.put(`${API_URL}/updatewithFile`, data)
@@ -62,4 +62,4 @@ class PaymentDataService {
 
 }
 
-export default new PaymentDataService();
+export default new OrderDataService();

@@ -39,6 +39,8 @@ public class Login extends AppCompatActivity {
 
     // Constant for REST API for User
     private final String BASE_URL = "https://csse-procurement-backend.herokuapp.com/user/";
+    // Constant for Logcat identification
+    private final String TAG = "USER: ";
     // Constant for user_role
     private final String USER_ROLE = "Site Manager";
     // Static variable to read UserId across the app
@@ -111,16 +113,16 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         // correct user_id and user fetched
-                        Log.i("onResponse: USER", response.toString());
+                        Log.i(TAG, response.toString());
 
                         try {
                             // check if the password is correct
                             if (response.get("password").toString().equals(user_pwd)) {
-                                Log.i("LOGIN: ", "Valid password");
+                                Log.i(TAG, "Valid password");
 
                                 // check if the user is authorized
                                 if (response.get("userRole").toString().equals(USER_ROLE)) {
-                                    Log.i("AUTH: ", "Authorized");
+                                    Log.i(TAG, "Authorized");
                                     USER_ID = response.get("userId").toString();
                                     Toast.makeText(mContext, "Login successful", Toast.LENGTH_SHORT).show();
 
@@ -128,12 +130,12 @@ public class Login extends AppCompatActivity {
                                     startActivity(new Intent(Login.this, MainMenu.class));
 
                                 } else {
-                                    Log.e("AUTH: ", "Not Authorized");
+                                    Log.e(TAG, "Not Authorized");
                                     Toast.makeText(mContext, "Not Authorized", Toast.LENGTH_SHORT).show();
                                 }
 
                             } else {
-                                Log.e("LOGIN: ", "Invalid password");
+                                Log.e(TAG, "Invalid password");
                                 Toast.makeText(mContext, "Invalid credentials", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
@@ -145,7 +147,7 @@ public class Login extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("onResponse: USER", error.toString());
+                        Log.e(TAG, error.toString());
                         Toast.makeText(mContext, "Login failed", Toast.LENGTH_SHORT).show();
                     }
                 }

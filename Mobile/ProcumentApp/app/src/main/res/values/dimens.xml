@@ -1,0 +1,29 @@
+<resources>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="screen_padding">16dp</dimen>
+
+    <!--    text sizes-->
+    <dimen name="page_title">18sp</dimen>
+    <dimen name="card_main_text">16sp</dimen>
+    <dimen name="button_text">14sp</dimen>
+    <dimen name="textSize_12">12sp</dimen>
+    <dimen name="card_secondary_text">11sp</dimen>
+    <dimen name="card_small_text">8sp</dimen>
+
+    <dimen name="cat_main_image">50dp</dimen>
+    <dimen name="cat_main_card_layout">167dp</dimen>
+    <dimen name="card_corner_radius">10dp</dimen>
+    <dimen name="card_elevation">5dp</dimen>
+    <dimen name="card_max_elevation">10dp</dimen>
+    <dimen name="card_layout_margin">16dp</dimen>
+    <dimen name="badge_layout_margin">5dp</dimen>
+    <dimen name="job_type_badge_corner_radius">25dp</dimen>
+    <dimen name="fav_icon_size">30dp</dimen>
+
+
+
+
+
+</resources>

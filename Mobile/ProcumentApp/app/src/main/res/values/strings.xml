@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">ProcumentApp</string>
+    <string name="login_label">Login</string>
+    <string name="user_id">User ID</string>
+    <string name="password">Password</string>
+    <string name="login_btn_text">Login</string>
+
+    <!--product name-->
+    <string name="pname">Product name</string>
+    <string name="pid">Product Id</string>
+    <string name="qty">QTY</string>
+
+    <!--Availabilty-->
+    <string name="avltitle">Availabilty</string>
+    <string name="bow">Based On weight of 72</string>
+    <string name="avlqty">Available QTY</string>
+    <string name="addtocart">Add to cart</string>
+
+    <!--Purchase Order-->
+    <string name="ptitle">Purchased Order details</string>
+    <string name="d_deatils">Delivery Details</string>
+    <string name="address">Address</string>
+    <string name="save">Save</string>
+
+    <!--Orders-->
+    <string name="order_t">Orders</string>
+    <string name="add_orders">Add Odders</string>
+    <string name="confirm_order">Confirm Odder</string>
+</resources>

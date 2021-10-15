@@ -44,18 +44,12 @@ class ViewCart extends Component{
             .catch((error) => {
                 console.log(error);
             })
-        //console.log("items"+this.state.items+"...")
     }
 
     showModalBox = () => {
         this.setState({show: true,pop:false})
     }
 
-    // //Modal box
-    // closeModalBox = () => {
-    //     this.setState({show: false})
-    //     this.refreshTable();
-    // }
 
     showCart = () => {
         this.setState({pop: true})
@@ -110,23 +104,18 @@ class ViewCart extends Component{
 
         const {items,total,vendorId} = this.state;
         return(
-
             <div className={"wrapper-div"}>
-
                     <Table striped responsive hover bordered >
                         <thead>
                         <tr>
-
                             <th className={"text-center"}>Item Name</th>
                             <th className={"text-center"}>Quantity</th>
                             <th className={"text-center"}>Action</th>
-
                         </tr>
                         </thead>
                         <tbody>
                              {items.map (item =>
                                     <tr key={item.itemId}>
-
                                         <td style={{verticalAlign: 'middle'}}>{item.itemName}</td>
                                         <td style={{verticalAlign: 'middle'}}>{item.quantity}</td>
                                         <td style={{verticalAlign: 'middle'}}>
@@ -144,13 +133,23 @@ class ViewCart extends Component{
                         <Badge bg="success" className={"px-3 py-2"} key={"0"}>Rs.{total}.00</Badge>
                     </Col>
                     <Col md={{ span: 4, offset: 4 }}>
-
+                        {items.length == 0 &&
+                        <button className={"cnfrm-order-disabled-btn"}
+                                type={"submit"}
+                                disabled
+                                key={this.state.vendorId}
+                                onClick={() => this.gotoDeliveryDetails()}>
+                            Confirm Order
+                        </button>
+                        }
+                        {items.length != 0 &&
                         <button className={"cnfrm-order-btn"}
                                 type={"submit"}
                                 key={this.state.vendorId}
                                 onClick={() => this.gotoDeliveryDetails()}>
                             Confirm Order
                         </button>
+                        }
                     </Col>
                 </Row>
             </div>

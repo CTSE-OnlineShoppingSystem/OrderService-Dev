@@ -259,4 +259,18 @@ margin-right:50px;
     border-radius: 10px;
     font-weight: bold;
 }
+
+.cnfrm-order-disabled-btn{
+    /*margin-right: 20px;*/
+    /*margin-top: 20px;*/
+    /*margin-bottom: 20px;*/
+    width: 150px;
+    height: 40px;
+    background-color: #acb1c6;
+    color: white;
+    border-style: solid;
+    border-color: #000000;
+    border-radius: 10px;
+    font-weight: bold;
+}
 /*commit*/

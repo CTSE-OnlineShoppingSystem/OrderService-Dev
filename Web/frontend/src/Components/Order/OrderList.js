@@ -179,27 +179,6 @@ class OrderList extends Component{
             <div>
             <div className={"background"}>
                 <div>
-                    {/*<Navbar expand="lg" className={"nav-main"}>*/}
-                    {/*    <Container>*/}
-                    {/*        <Navbar.Brand href="#home" className={"topic"}>Procurement System</Navbar.Brand>*/}
-                    {/*        <Navbar.Toggle aria-controls="basic-navbar-nav" />*/}
-                    {/*        <Navbar.Collapse id="basic-navbar-nav">*/}
-                    {/*            {this.state.userRole === "Site Manager" &&*/}
-                    {/*            <Nav className="me-auto">*/}
-                    {/*                /!*<Nav.Link href="/">Home</Nav.Link>*!/*/}
-                    {/*                <Nav.Link href="/products" className={"topic-link"}>Products</Nav.Link>*/}
-                    {/*                */}
-                    {/*            </Nav>}*/}
-                    {/*            {this.state.userRole === "Site Manager" &&*/}
-                    {/*            <Nav>*/}
-                    {/*                <Nav.Link ><button className={"btn-logout"} onClick={this.logout}>Log Out</button></Nav.Link>*/}
-
-
-                    {/*            </Nav>*/}
-                    {/*            }*/}
-                    {/*        </Navbar.Collapse>*/}
-                    {/*    </Container>*/}
-                    {/*</Navbar>*/}
                     <Navbar1/>
 
                 </div>

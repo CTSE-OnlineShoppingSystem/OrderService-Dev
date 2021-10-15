@@ -1,14 +1,8 @@
 import React, {Component} from "react";
 import Swal from "sweetalert2";
-import ProductDataService from "./ProductDataService";
 import {Accordion,Container,Button, Card, Col, Form, Image, Row} from "react-bootstrap";
 import axios from "axios";
-import {config} from "@fortawesome/fontawesome-svg-core";
-// import moment from "moment";
-// import pdf from "../../Assets/pdf.svg";
-// import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-// import {faDownload} from "@fortawesome/free-solid-svg-icons";
-// import word from "../../Assets/word.svg";
+
 
 class UpdateProduct extends Component{
 
@@ -140,8 +134,7 @@ class UpdateProduct extends Component{
 
 
                         <div className={"text-end"}>
-
-                            <button type={"submit"} className={"submit-form-btn"}>Update Product</button>
+                            <button type={"submit"} className={"update-product-btn"}>Update Product</button>
                         </div>
 
                     </Form>

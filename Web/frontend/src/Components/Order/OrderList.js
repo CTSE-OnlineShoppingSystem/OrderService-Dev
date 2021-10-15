@@ -16,6 +16,8 @@ import React from "react";
 import AuthenticationService from "../Login/AuthenticationService";
 import Swal from "sweetalert2";
 import Navbar1 from '../Navbar1'
+import ViewCart from "../Product/ViewCart";
+import Items from "./Items";
 
 class OrderList extends Component{
 
@@ -24,13 +26,18 @@ class OrderList extends Component{
 
         this.state = {
             orders: [],
-            userRole: AuthenticationService.loggedUserRole()
-
+            userRole: AuthenticationService.loggedUserRole(),
+            show: '',
+            orderId:''
         }
     }
 
     componentDidMount(){
         this.refreshTable();
+    }
+
+    paymentHandler = (id) =>{
+        this.props.history.push(`/paymentDetails/${id}`);
     }
 
     refreshTable = () =>{
@@ -147,9 +154,23 @@ class OrderList extends Component{
             });
         this.refreshTable();
     }
+
     logout = () => {
         AuthenticationService.logout();
         this.props.history.push("/")
+    }
+
+    showItems (orderId){
+        this.setState({
+            orderId: orderId,
+            show: true
+        })
+    }
+
+    closeItems = () => {
+        this.setState({
+            show: false
+        })
     }
 
     render() {
@@ -185,7 +206,7 @@ class OrderList extends Component{
                 <Card className={"crd-order-tb"}>
                     <Card.Body>
                         <Card.Title className={"crd-order-title"}>Orders List</Card.Title>
-                    <div className={"main-div"}>
+                    <center className={"main-div"}>
 
                         <div>
                             <ButtonGroup className={"order-btn-group"}>
@@ -202,7 +223,7 @@ class OrderList extends Component{
                             </ButtonGroup>
                         </div>
 
-                        <Table striped responsive="xl" hover bordered className={"order-table"}>
+                        <Table striped responsive hover bordered className={"order-table"}>
                             <thead>
                             <tr>
                                 <th className={"text-center"}>Order ID</th>
@@ -249,29 +270,31 @@ class OrderList extends Component{
                                                 </td>
                                                 <td className={"text-center"} style={{verticalAlign: 'middle'}}>
                                                     {order.paymentStatus === "Paid" &&
-                                                    <Badge bg="primary" className={"px-3 py-2"} key={"0"}>APPROVED</Badge>
+                                                    <Badge bg="success" className={"px-3 py-2"} key={"0"}>PAID</Badge>
                                                     }
                                                     {order.paymentStatus === "Pending" &&
                                                     <Badge bg="warning" text="dark" className={"px-3 py-2"} key={"0"}>PENDING</Badge>
                                                     }
                                                 </td>
                                                 <td className={"text-center"} style={{verticalAlign: 'middle'}}>
-                                                    {order.deliveryDetails === "Completed" &&
-                                                    <Badge bg="success" className={"px-3 py-2"} key={"0"}>APPROVED</Badge>
+                                                    {order.deliveryStatus === "Completed" &&
+                                                    <Badge bg="success" className={"px-3 py-2"} key={"0"}>COMPLETED</Badge>
                                                     }
-                                                    {order.deliveryDetails === "Pending" &&
+                                                    {order.deliveryStatus === "Pending" &&
                                                     <Badge bg="warning" text="dark" className={"px-3 py-2"} key={"0"}>PENDING</Badge>
                                                     }
                                                 </td>
-                                                <td style={{verticalAlign: 'middle'}}> <Button variant={"outline-primary"} >
-                                                    <FontAwesomeIcon icon={faExternalLinkAlt}/>
-                                                </Button></td>
-                                                <td style={{verticalAlign: 'middle'}}>{order.OrderDetails}</td>
+                                                <td style={{verticalAlign: 'middle'}}>
+                                                    <Button variant={"outline-primary"}
+                                                        onClick={() => this.showItems(order.orderId)}>
+                                                        <FontAwesomeIcon icon={faExternalLinkAlt}/>
+                                                    </Button>
+                                                </td>
+                                                <td style={{verticalAlign: 'middle'}}>{order.deliveryDetails}</td>
                                                 <td style={{verticalAlign: 'middle'}}>Rs.{order.total}</td>
                                                 <td className={"text-center"} style={{verticalAlign: 'middle'}}>
                                                     {this.state.userRole === "Management Staff" &&
                                                     <ButtonGroup>
-
                                                         <Button variant={"outline-primary"} type={"submit"}
                                                                 onClick={() => this.approveHandler(order.orderId)}>
                                                             <FontAwesomeIcon icon={faCheck}/>
@@ -297,7 +320,6 @@ class OrderList extends Component{
                                                     }
                                                     {this.state.userRole === "Site Manager" &&
                                                     <ButtonGroup>
-
                                                         <Button variant={"outline-primary"} type={"submit"}
                                                                 onClick={() => this.approveHandler(order.orderId)} disabled>
                                                             <FontAwesomeIcon icon={faCheck}/>
@@ -317,9 +339,19 @@ class OrderList extends Component{
                                                 </td>
                                                 }
 
-                                                {this.state.userRole === "Accounting Staff" &&
+                                                {this.state.userRole === "Accounting Staff" && order.paymentStatus === "Paid" &&
                                                 <td className={"text-center"} style={{verticalAlign: 'middle'}}>
-                                                    <Button variant={"outline-success"} type={"submit"} >
+                                                    <Button variant={"outline-success"} type={"submit"}
+                                                            onClick = {() => this.paymentHandler(order.orderId)} disabled>
+                                                        <FontAwesomeIcon icon={faMoneyBillWaveAlt}/>
+                                                    </Button>
+                                                </td>
+                                                }
+
+                                                {this.state.userRole === "Accounting Staff" && (order.paymentStatus === "Pending" || order.paymentStatus === null) &&
+                                                <td className={"text-center"} style={{verticalAlign: 'middle'}}>
+                                                    <Button variant={"outline-success"} type={"submit"}
+                                                            onClick = {() => this.paymentHandler(order.orderId)} >
                                                         <FontAwesomeIcon icon={faMoneyBillWaveAlt}/>
                                                     </Button>
                                                 </td>
@@ -339,26 +371,21 @@ class OrderList extends Component{
                             </tbody>
                         </Table>
 
-                        {/*--------------------------Model Box to Edit Conference--------------------------*/}
-
-                        {/*<Modal show={this.state.show} onHide={this.handleClose} centered>*/}
-                        {/*    <Modal.Header closeButton>*/}
-                        {/*        <Modal.Title>Update</Modal.Title>*/}
-                        {/*    </Modal.Header>*/}
-                        {/*    <Modal.Body> <UpdateConferenceDetailsComponent conferenceId={this.state.conferenceId}/>*/}
-                        {/*    </Modal.Body>*/}
-                        {/*</Modal>*/}
-
-                        {/*--------------------------------------------------------------------------------*/}
-                    </div>
+                        {/*------------------------ Modal Box for ViewMore Page ------------------------*/}
+                        <Modal show={this.state.show} onHide={this.closeItems} centered fullscreen={"sm-down"} size={"lg"}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Items</Modal.Title>
+                            </Modal.Header >
+                            <Modal.Body className={"custom-modal-body-login p-0"}>
+                                <Items orderId={this.state.orderId} close={this.closeItems} />
+                            </Modal.Body>
+                        </Modal>
+                        {/*------------------------------------------------------------------------------*/}
+                    </center>
                     </Card.Body>
-</Card>
-
-
-
+                </Card>
             </div>
             </div>
-
         )
     }
 }

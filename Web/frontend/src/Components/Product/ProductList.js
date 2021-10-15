@@ -59,6 +59,7 @@ class ProductList extends Component{
     }
 
     gotoUpdateProduct(id) {
+        console.log(id)
         this.setState({
             id: id,
             show: true
@@ -184,7 +185,7 @@ class ProductList extends Component{
 
                                         : [
                                             products.map (product =>
-                                                <tr key={products.orderId}>
+                                                <tr key={products.productId}>
                                                     <td style={{verticalAlign: 'middle'}}>{product.productId}</td>
                                                     <td style={{verticalAlign: 'middle'}}>{product.productName}</td>
                                                     <td style={{verticalAlign: 'middle'}}>Rs.{product.productPrice}</td>
@@ -193,8 +194,8 @@ class ProductList extends Component{
                                                     <td className={"text-center"} style={{verticalAlign: 'middle'}}>
                                                         <ButtonGroup>
                                                             <Button variant={"warning"} type={"submit"}
-                                                                    key={product.id}
-                                                                    onClick={() => this.gotoUpdateProduct(product.orderId)}>
+                                                                    key={product.productId}
+                                                                    onClick={() => this.gotoUpdateProduct(product.productId)}>
                                                                 <FontAwesomeIcon icon={faEdit}/>
                                                             </Button>
                                                         </ButtonGroup>

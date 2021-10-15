@@ -13,6 +13,14 @@
     border-radius: 10px;
     height: 40px;
 }
+.delivery-d-input{
+    border-style: solid;
+    border-color: rgba(24, 54, 210, 0.66);
+    border-radius: 10px;
+    height: 40px;
+    width: 715px;
+    margin-right: 200px;
+}
 .delivery-input:hover{
     border-style: solid;
     border-color: #1836d2;

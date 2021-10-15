@@ -8,6 +8,7 @@ import PaymentList from "./Payment/PaymentList";
 import Login from "./Login/Login"
 import Home from "./Home";
 import DeliveryDetails from "./Product/DeliveryDetails";
+import PaymentDetails from "./Product/PaymentDetails";
 
 class Frontend extends Component {
 
@@ -23,6 +24,7 @@ class Frontend extends Component {
                         <Route path="/paymentList" exact component={PaymentList}/>
                         <Route path="/login" exact component={Login}/>
                         <Route path="/deliveryDetails" exact component={DeliveryDetails}/>
+                        <Route path="/paymentDetails/:id" exact component={PaymentDetails}/>
                     </Switch>
                 </Router>
             </div>

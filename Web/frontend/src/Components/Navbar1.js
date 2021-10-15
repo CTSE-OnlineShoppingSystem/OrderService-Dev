@@ -1,12 +1,8 @@
 import React, {Component} from "react";
 import {CloseButton, Col, Container, Form, Image, Modal, Nav, Navbar, NavDropdown, Row} from "react-bootstrap";
-import NavbarToggle from "react-bootstrap/NavbarToggle";
 import "../Stylesheets/Home.css";
-import logo from "../Assets/elms-logo-black.svg"
-import studyImg from "../Assets/elearning.png";
-import mailBoxImg from "../Assets/Mailbox-bro.png";
 import {Link, withRouter} from "react-router-dom";
-import Swal from "sweetalert2";
+import logo from "../Assets/Logo.png"
 import AuthenticationService from "./Login/AuthenticationService";
 //import emailjs from "emailjs-com";
 
@@ -60,6 +56,7 @@ class Navbar1 extends  Component{
 
                 <Navbar expand="lg" className={"nav-main"}>
                     <Container>
+                        <Image width={"100px"} src={logo}></Image>
                         <Navbar.Brand href="#home" className={"topic"}>Procurement System</Navbar.Brand>
 
                         <Navbar.Toggle aria-controls="basic-navbar-nav"/>

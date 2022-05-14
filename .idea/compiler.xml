@@ -6,16 +6,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="implementation-walkthrough-2021s2_reg_we_29" />
+        <module name="OrderService-Backend-Dev" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="implementation-walkthrough-2021s2_reg_we_29" target="11" />
+      <module name="OrderService-Backend-Dev" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="implementation-walkthrough-2021s2_reg_we_29" options="-parameters" />
+      <module name="OrderService-Backend-Dev" options="-parameters" />
     </option>
   </component>
 </project>

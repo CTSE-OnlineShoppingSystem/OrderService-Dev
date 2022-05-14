@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.example.cssebackend.CartTest
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.733 s - in com.example.cssebackend.CartTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.836 s - in com.example.cssebackend.CartTest

@@ -1,1 +1,0 @@
-Mobile Backend readme file

@@ -27,6 +27,6 @@ jobs:
       - name: Scripts
         run:
           docker build -t order-service-dev .
-          docker login -u=minindukothalawala -p=a37f3402-da28-4d50-bb9d-9600bb3e23a9
+          docker login --username=minindukothalawala -p a37f3402-da28-4d50-bb9d-9600bb3e23a9
           docker tag order-service-dev minindukothalawala/ctseorderervice
           docker push minindukothalawala/ctseorderervice

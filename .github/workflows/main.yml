@@ -34,6 +34,7 @@ jobs:
       - name: Azure Kubernetes set context
         uses: Azure/aks-set-context@v1
         with:
+          # Run below command in azure cli
           # Azure credentials i.e. output of `az ad sp create-for-rbac --sdk-auth`
           creds: ${{secrets.AZURE_CREDENTIALS}}
           # Resource Group Name
